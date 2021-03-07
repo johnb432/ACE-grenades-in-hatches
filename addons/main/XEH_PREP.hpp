@@ -1,0 +1,2 @@
+PREPFNC(conditionThrow);
+PREPFNC(throwGrenade);
