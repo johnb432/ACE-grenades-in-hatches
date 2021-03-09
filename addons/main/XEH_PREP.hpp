@@ -1,2 +1,2 @@
-PREPFNC(conditionThrow);
-PREPFNC(throwGrenade);
+PREPFNC(dropCondition);
+PREPFNC(dropGrenade);

@@ -58,17 +58,42 @@ PREP_RECOMPILE_END;
 ] call CBA_fnc_addSetting;
 
 [
+    QGVAR(allowedBehaviorSetting),
+    "EDITBOX",
+    ["Target awareness", "The array of allowed behavior types that the target crew must have in order to throw in a grenade. Format is an array of strings. Default contains all behavior possibilities."],
+    [COMPONENT_NAME, "Lists"],
+    "['CARELESS','SAFE','AWARE','COMBAT','STEALTH']",
+    false,
+    {
+        if (GVAR(allowedBehaviorSetting) isEqualTo "") exitWith {
+            GVAR(allowedBehavior) = [];
+            GVAR(allowedBehaviorSetting) = "[]";
+        };
+
+        GVAR(allowedBehavior) = parseSimpleArray GVAR(allowedBehaviorSetting);
+    }
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(disablePlayerAmbush),
+    "CHECKBOX",
+    ["Disable player controlled targets to be attacked", "If a player is part of the target's crew, then disable the usage of this interaction."],
+    [COMPONENT_NAME, "Player"],
+    false
+] call CBA_fnc_addSetting;
+
+[
     QGVAR(damageDealtCrew),
     "SLIDER",
     ["Damage dealt to crew", "0 for no damage, 0-0.5 for minor, 0.5-0.75 for medium and 0.75+ for large wounds"],
     [COMPONENT_NAME, "Damages"],
-    [0, 10, 3, 2]
+    [0, 30, 5, 2]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtHull),
     "SLIDER",
-    ["Damage dealt to vehicle's hull", "Percentage value."],
+    ["Damage dealt to vehicle's hull", "Damage dealt with one interaction. Percentage value."],
     [COMPONENT_NAME, "Damages"],
     [0.25, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
@@ -76,7 +101,7 @@ PREP_RECOMPILE_END;
 [
     QGVAR(damageDealtEngine),
     "SLIDER",
-    ["Damage dealt to vehicle's engine", "Percentage value."],
+    ["Damage dealt to vehicle's engine", "Damage dealt with one interaction. Percentage value."],
     [COMPONENT_NAME, "Damages"],
     [0.25, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
@@ -84,7 +109,31 @@ PREP_RECOMPILE_END;
 [
     QGVAR(damageDealtTurret),
     "SLIDER",
-    ["Damage dealt to vehicle's turret", "Percentage value."],
+    ["Damage dealt to vehicle's turret", "Damage dealt with one interaction. Percentage value."],
+    [COMPONENT_NAME, "Damages"],
+    [0.25, 1, 1, 2, true]
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(damageDealtHullMax),
+    "SLIDER",
+    ["Maximum hull damage allowed", "Maximum damage that can be dealt to vehicle's hull with multiple interactions. Percentage value."],
+    [COMPONENT_NAME, "Damages"],
+    [0.25, 1, 0.75, 2, true]
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(damageDealtEngineMax),
+    "SLIDER",
+    ["Maximum engine damage allowed", "Maximum damage that can be dealt to vehicle's engine with multiple interactions. Percentage value."],
+    [COMPONENT_NAME, "Damages"],
+    [0.25, 1, 1, 2, true]
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(damageDealtTurretMax),
+    "SLIDER",
+    ["Maximum turret damage allowed", "Maximum damage that can be dealt to vehicle's turret with multiple interactions. Percentage value."],
     [COMPONENT_NAME, "Damages"],
     [0.25, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
@@ -94,7 +143,7 @@ PREP_RECOMPILE_END;
     "SLIDER",
     ["Delay to explosion", "Sets the delay of explosion after the explosive has been used."],
     [COMPONENT_NAME, "Timings"],
-    [0, 10, 3, 1]
+    [2.5, 20, 3, 1]
 ] call CBA_fnc_addSetting;
 
 [

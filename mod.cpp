@@ -1,6 +1,6 @@
-name = "ACE Grenades in Hatches";
+name = "ACE Grenades in Hatches - Tweaked";
 actionName = "GitHub";
-action = "https://github.com/johnb432/AIME-fix";
-tooltip = "AIME";
-overview = "Allows the player to throw grenades in armored vehicles.";
+action = "https://github.com/johnb432/ACE-grenades-in-hatches";
+tooltip = "ACE Grenades in Hatches - Tweaked";
+overview = "Allows players to drop grenades in armored vehicles.";
 author = "johnb43, Launchman";
