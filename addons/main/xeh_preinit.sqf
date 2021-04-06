@@ -143,7 +143,7 @@ PREP_RECOMPILE_END;
     "SLIDER",
     ["Delay to explosion", "Sets the delay of explosion after the explosive has been used."],
     [COMPONENT_NAME, "Timings"],
-    [2.5, 20, 3, 1]
+    [5, 20, 5, 1]
 ] call CBA_fnc_addSetting;
 
 [

@@ -11,21 +11,17 @@
 
 // Has to be done using an event, because setHitPointDamage isn't working as described on the wiki page
 [QGVAR(vehicleDamage), {
-    params ["_target"];
+    params ["_player", "_target"];
 
-    private _players = [];
+    private _players = (crew _target) select {isPlayer _x};
 
-    {
-        if (isPlayer _x) then {_players pushBack _x};
-    } forEach (crew _target);
-
-    if (_players isNotEqualTo []) then {
-        ["Someone threw a grenades into the hatch!!!", true, GVAR(delayExplosion), 10] remoteExecCall ["ace_common_fnc_displayText", _players];
+    if (count _players isNotEqualTo 0) then {
+        ["Someone threw a grenades into the hatch!!!", true, GVAR(delayExplosion) min 5, 10] remoteExecCall ["ace_common_fnc_displayText", _players];
     };
 
-    playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _target];
+    playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _target, false, getPos _target, 5, 1, 20];
 
-    _player removeMagazine ((GVAR(allowedGrenades) arrayIntersect (magazines _player)) select 0);
+    _player removeMagazineGlobal ((GVAR(allowedGrenades) arrayIntersect (magazines _player)) select 0);
 
     [{
        params ["_player", "_target"];
@@ -38,7 +34,7 @@
        [{
            (_this select 0) isEqualTo objNull
        }, {
-           params ["_explosion", "_player", "_target"];
+           params ["_explosion", "_target"];
 
            private _arrayDamages = [GVAR(damageDealtEngine), GVAR(damageDealtHull), GVAR(damageDealtTurret)];
            private _arrayMaxDamages = [GVAR(damageDealtEngineMax), GVAR(damageDealtHullMax), GVAR(damageDealtTurretMax)];
@@ -64,8 +60,8 @@
 
            // Use event in case the crew isn't local; e.g, 2+ players in one vehicle
            {
-               [QGVAR(medicalDamage), [_x, (selectRandom _allBodyParts)], _x] call CBA_fnc_targetEvent;
+               [QGVAR(medicalDamage), [_x, selectRandom _allBodyParts], _x] call CBA_fnc_targetEvent;
            } forEach (crew _target);
-       }, [_explosion, _player, _target]] call CBA_fnc_waitUntilAndExecute;
-    }, [_player, _target], GVAR(delayExplosion) - 2.5] call CBA_fnc_waitAndExecute;
+       }, [_explosion, _target]] call CBA_fnc_waitUntilAndExecute;
+    }, [_player, _target], GVAR(delayExplosion) - 5] call CBA_fnc_waitAndExecute;
 }] call CBA_fnc_addEventHandler;

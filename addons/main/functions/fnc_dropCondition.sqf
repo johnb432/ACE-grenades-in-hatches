@@ -19,21 +19,10 @@
 
 params ["_player", "_target"];
 
-if (count(GVAR(allowedGrenades) arrayIntersect (magazines _player)) isEqualTo 0 || {(side _target) isEqualTo (side _player)} || {(typeOf _target) in GVAR(blacklistVehicles)}) exitWith {false};
+// See if player has required grenades, whether sides are not the same and whether vehicle is in blacklist
+if (count (GVAR(allowedGrenades) arrayIntersect (magazines _player)) isEqualTo 0 || {(side _target) isEqualTo (side _player)} || {(typeOf _target) in GVAR(blacklistVehicles)}) exitWith {false};
+// Checks behaviour for behaviour whitelist
 if !(behaviour _target in GVAR(allowedBehavior)) exitWith {false};
 
-private _checkPlayer = true;
-if (GVAR(disablePlayerAmbush)) then {
-    {
-        if (isPlayer _x) exitWith {_checkPlayer = false};
-    } forEach (crew _target);
-};
-
-private _checkBlacklist = true;
-if (GVAR(blacklistVehiclesInheritance) isNotEqualTo []) then {
-    {
-        if (_target isKindOf _x) exitWith {_checkBlacklist = false};
-    } forEach GVAR(blacklistVehiclesInheritance);
-};
-
-_checkBlacklist && _checkPlayer
+// Checks for player ambush setting and whether vehicle is in vehicle inheritance blacklist
+!(GVAR(disablePlayerAmbush) && {(crew _target findIf {isPlayer _x}) isNotEqualTo -1}) && {!(GVAR(blacklistVehiclesInheritance) isNotEqualTo [] && {(GVAR(blacklistVehiclesInheritance) findIf {_target isKindOf _x}) isNotEqualTo -1})}

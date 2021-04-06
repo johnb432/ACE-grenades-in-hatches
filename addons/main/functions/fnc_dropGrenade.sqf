@@ -20,5 +20,5 @@ params ["_target"];
 
 [GVAR(delayInteraction), _target, {
     params ["_target"];
-    [QGVAR(vehicleDamage), [_target], _target] call CBA_fnc_targetEvent;
+    [QGVAR(vehicleDamage), [_player, _target], _target] call CBA_fnc_targetEvent;
 }, {}, "Dropping Grenade in hatch"] call ace_common_fnc_progressBar;
