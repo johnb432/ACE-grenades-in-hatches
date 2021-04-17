@@ -20,7 +20,7 @@
 params ["_player", "_target"];
 
 // See if player has required grenades, whether sides are not the same and whether vehicle is in blacklist
-if (count (GVAR(allowedGrenades) arrayIntersect (magazines _player)) isEqualTo 0 || {(side _target) isEqualTo (side _player)} || {(typeOf _target) in GVAR(blacklistVehicles)}) exitWith {false};
+if (count (GVAR(allowedGrenades) arrayIntersect (magazines _player)) isEqualTo 0 || {!([side _player, side _target] call BIS_fnc_sideIsEnemy)} || {(typeOf _target) in GVAR(blacklistVehicles)}) exitWith {false};
 // Checks behaviour for behaviour whitelist
 if !(behaviour _target in GVAR(allowedBehavior)) exitWith {false};
 

@@ -4,29 +4,36 @@
 [QGVAR(medicalDamage), {
     params ["_unit", "_bodyPart"];
 
-    if (isDamageAllowed _unit) then {
-        [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade"] call ace_medical_fnc_addDamageToUnit;
+    if (!isDamageAllowed _unit) exitWith {};
+    [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade"] call ace_medical_fnc_addDamageToUnit;
+}] call CBA_fnc_addEventHandler;
+
+// Local event raised when progressbar is done
+[QGVAR(dropGrenadeEvent), {
+    (_this select 0) params ["_player", "_target"];
+
+    private _players = (crew _target) select {isPlayer _x};
+
+    if (_players isNotEqualTo []) then {
+        ["Someone threw a grenade into the hatch!!!", true, GVAR(delayExplosion) min 5, 10] remoteExecCall ["ace_common_fnc_displayText", _players];
     };
+
+    playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _target, false, getPos _target, 5, 1, 20];
+
+    // removeMagazine makes UI buggy
+    _player removeItem ((GVAR(allowedGrenades) arrayIntersect (magazines _player)) select 0);
+
+    [QGVAR(vehicleDamage), [_player, _target], _target] call CBA_fnc_targetEvent;
 }] call CBA_fnc_addEventHandler;
 
 // Has to be done using an event, because setHitPointDamage isn't working as described on the wiki page
 [QGVAR(vehicleDamage), {
     params ["_player", "_target"];
 
-    private _players = (crew _target) select {isPlayer _x};
-
-    if (count _players isNotEqualTo 0) then {
-        ["Someone threw a grenades into the hatch!!!", true, GVAR(delayExplosion) min 5, 10] remoteExecCall ["ace_common_fnc_displayText", _players];
-    };
-
-    playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _target, false, getPos _target, 5, 1, 20];
-
-    _player removeMagazineGlobal ((GVAR(allowedGrenades) arrayIntersect (magazines _player)) select 0);
-
     [{
        params ["_player", "_target"];
 
-       private _explosion = "mini_Grenade" createVehicle (getPosATL _target);
+       private _explosion = "mini_Grenade" createVehicle [0, 0, 0];
        _explosion attachTo [_target, [0, 0, -1]];
        _explosion setShotParents [_player, _player];
        _explosion setDamage 1;

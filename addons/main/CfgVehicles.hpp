@@ -4,10 +4,9 @@ class CfgVehicles {
         class ACE_Actions {
             class ACE_MainActions {
                 class GVAR(dropGrenade) {
-                    condition = QUOTE(ARR2(_player,_target) call FUNC(dropCondition));
+                    condition = QUOTE([ARR_2(_player,_target)] call FUNC(dropCondition));
                     displayName = "Drop Grenade in hatch";
-                    exceptions[] = {"isNotSwimming"};
-                    statement = QUOTE(_target call FUNC(dropGrenade));
+                    statement = QUOTE([ARR_2(_player,_target)] call FUNC(dropGrenade));
                 };
             };
         };
@@ -27,10 +26,9 @@ class CfgVehicles {
         class ACE_Actions: ACE_Actions {
             class ACE_MainActions: ACE_MainActions {
                 class GVAR(dropGrenade) {
-                    condition = QUOTE(ARR2(_player,_target) call FUNC(dropCondition));
+                    condition = QUOTE([ARR_2(_player,_target)] call FUNC(dropCondition));
                     displayName = "Drop Grenade in hatch";
-                    exceptions[] = {"isNotSwimming"};
-                    statement = QUOTE(_target call FUNC(dropGrenade));
+                    statement = QUOTE([ARR_2(_player,_target)] call FUNC(dropGrenade));
                 };
             };
         };

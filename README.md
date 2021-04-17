@@ -13,6 +13,7 @@ Multiple CBA settings for customization:
 * **Blacklist Vehicles (with inheritance):** Any vehicle and their children in this list will not have the action enabled. You can use this setting to more easily blacklist a family of vehicles.
 * **Target awareness:** The target's crew must be in one of the behaviour states defined in the array in order to be able to use the interaction.
 * **Disable player controlled targets to be attacked:** If this setting is set to true, any target that has at least 1 player in it will not be able to be ambushed.
+* **Interaction range:** Sets the maximum interaction range. This can be used to prevent throwing a grenade in a vehicle that has moved 100m away during the time you started the interaction.
 * **Damage dealt to units:** Allows the setting of the ACE damage applied to the crew of the target vehicle. The damage is applied randomly by both the function and the ACE damage function.
 * **Damage dealt to hull:** Sets the amount of damage the hull will take from one grenade.
 * **Damage dealt to engine:** Sets the amount of damage the engine will take from one grenade.

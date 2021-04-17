@@ -5,7 +5,8 @@
  * Drops a grenade inside of an armored vehicle.
  *
  * Arguments:
- * 0: Target vehicle <OBJECT>
+ * 0: Player <OBJECT>
+ * 1: Target vehicle <OBJECT>
  *
  * Return Value:
  * None
@@ -16,9 +17,9 @@
  * Public: No
  */
 
-params ["_target"];
+params ["_unit", "_target"];
 
-[GVAR(delayInteraction), _target, {
-    params ["_target"];
-    [QGVAR(vehicleDamage), [_player, _target], _target] call CBA_fnc_targetEvent;
-}, {}, "Dropping Grenade in hatch"] call ace_common_fnc_progressBar;
+[GVAR(delayInteraction), [_unit, _target], QGVAR(dropGrenadeEvent), {}, "Dropping Grenade in hatch", {
+    (_this select 0) params ["_unit", "_target"];
+    _unit distance _target < GVAR(distanceInteraction)
+}] call ace_common_fnc_progressBar;

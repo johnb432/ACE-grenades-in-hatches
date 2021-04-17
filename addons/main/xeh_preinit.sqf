@@ -83,6 +83,14 @@ PREP_RECOMPILE_END;
 ] call CBA_fnc_addSetting;
 
 [
+    QGVAR(distanceInteraction),
+    "SLIDER",
+    ["Interaction range", "Sets the maximum interaction range."],
+    [COMPONENT_NAME, "Player"],
+    [2, 30, 10, 1]
+] call CBA_fnc_addSetting;
+
+[
     QGVAR(damageDealtCrew),
     "SLIDER",
     ["Damage dealt to crew", "0 for no damage, 0-0.5 for minor, 0.5-0.75 for medium and 0.75+ for large wounds"],
