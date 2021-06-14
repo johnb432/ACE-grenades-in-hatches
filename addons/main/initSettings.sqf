@@ -1,11 +1,3 @@
-#include "script_component.hpp"
-
-ADDON = false;
-
-PREP_RECOMPILE_START;
-#include "XEH_PREP.hpp"
-PREP_RECOMPILE_END;
-
 [
     QGVAR(allowedGrenadesSetting),
     "EDITBOX",
@@ -161,5 +153,3 @@ PREP_RECOMPILE_END;
     [COMPONENT_NAME, "Timings"],
     [0.5, 10, 3, 1]
 ] call CBA_fnc_addSetting;
-
-ADDON = true;

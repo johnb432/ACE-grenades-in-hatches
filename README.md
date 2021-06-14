@@ -5,6 +5,7 @@
 
 ## Content
 
+This mod is required on all clients.
 This addon allows the user to throw grenades into armored vehicles with hatches. The interaction point is the main interaction point of the vehicle.
 
 Multiple CBA settings for customization:

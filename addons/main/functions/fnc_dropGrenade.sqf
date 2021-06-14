@@ -21,5 +21,7 @@ params ["_unit", "_target"];
 
 [GVAR(delayInteraction), [_unit, _target], QGVAR(dropGrenadeEvent), {}, "Dropping Grenade in hatch", {
     (_this select 0) params ["_unit", "_target"];
+    
+    // If the target has moved too far away from the player since the start of the interaction, stop the interaction
     _unit distance _target < GVAR(distanceInteraction)
 }] call ace_common_fnc_progressBar;
