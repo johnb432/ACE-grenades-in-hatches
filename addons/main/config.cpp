@@ -24,5 +24,4 @@ class CfgMods {
 };
 
 #include "CfgEventHandlers.hpp"
-#include "CfgFunctions.hpp"
 #include "CfgVehicles.hpp"
