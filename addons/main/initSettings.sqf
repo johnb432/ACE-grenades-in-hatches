@@ -91,11 +91,19 @@
 ] call CBA_fnc_addSetting;
 
 [
+    QGVAR(forceCrewDismount),
+    "CHECKBOX",
+    ["Force crew dismount", "Forces the crew to dismount, regardless of vehicle damage."],
+    [COMPONENT_NAME, "Damages"],
+    false
+] call CBA_fnc_addSetting;
+
+[
     QGVAR(damageDealtHull),
     "SLIDER",
     ["Damage dealt to vehicle's hull", "Damage dealt with one interaction. Percentage value."],
     [COMPONENT_NAME, "Damages"],
-    [0.25, 1, 0.75, 2, true]
+    [0, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
@@ -103,7 +111,7 @@
     "SLIDER",
     ["Damage dealt to vehicle's engine", "Damage dealt with one interaction. Percentage value."],
     [COMPONENT_NAME, "Damages"],
-    [0.25, 1, 1, 2, true]
+    [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
@@ -111,7 +119,7 @@
     "SLIDER",
     ["Damage dealt to vehicle's turret", "Damage dealt with one interaction. Percentage value."],
     [COMPONENT_NAME, "Damages"],
-    [0.25, 1, 1, 2, true]
+    [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
@@ -119,7 +127,7 @@
     "SLIDER",
     ["Maximum hull damage allowed", "Maximum damage that can be dealt to vehicle's hull with multiple interactions. Percentage value."],
     [COMPONENT_NAME, "Damages"],
-    [0.25, 1, 0.75, 2, true]
+    [0, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
@@ -127,7 +135,7 @@
     "SLIDER",
     ["Maximum engine damage allowed", "Maximum damage that can be dealt to vehicle's engine with multiple interactions. Percentage value."],
     [COMPONENT_NAME, "Damages"],
-    [0.25, 1, 1, 2, true]
+    [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
@@ -135,7 +143,7 @@
     "SLIDER",
     ["Maximum turret damage allowed", "Maximum damage that can be dealt to vehicle's turret with multiple interactions. Percentage value."],
     [COMPONENT_NAME, "Damages"],
-    [0.25, 1, 1, 2, true]
+    [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
