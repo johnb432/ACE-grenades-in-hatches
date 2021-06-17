@@ -3,6 +3,9 @@ prefix = "grenades_hatches"
 author = "johnb43"
 template = "cba"
 mainprefix = "x"
-files = ["mod.cpp", "README.md"]
+files = [
+    "mod.cpp",
+    "README.md"
+]
 folder_optionals = false
 sig_version = 3
