@@ -5,6 +5,7 @@ template = "cba"
 mainprefix = "x"
 files = [
     "mod.cpp",
+    "LICENSE",
     "README.md"
 ]
 folder_optionals = false

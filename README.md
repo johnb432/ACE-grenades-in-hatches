@@ -29,3 +29,10 @@ Multiple CBA settings for customization:
 ## Credit
 
 <b>Launchman</b> for making the [original mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2398240266) and allowing me to edit his version, many thanks!
+
+## How to create PBOs
+
+* Download hemtt from [here](https://brettmayson.github.io/HEMTT/#/)
+* Place hemtt.exe inside the project folder (same level as addons)
+* Open commmand terminal, navigate to said folder (Windows: cd <insert path>)
+* Type "hemtt build --release"
