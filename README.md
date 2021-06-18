@@ -5,6 +5,7 @@
 
 ## Content
 
+This mod is required on all clients.
 This addon allows the user to throw grenades into armored vehicles with hatches. The interaction point is the main interaction point of the vehicle.
 
 Multiple CBA settings for customization:
@@ -14,10 +15,11 @@ Multiple CBA settings for customization:
 * **Target awareness:** The target's crew must be in one of the behaviour states defined in the array in order to be able to use the interaction.
 * **Disable player controlled targets to be attacked:** If this setting is set to true, any target that has at least 1 player in it will not be able to be ambushed.
 * **Interaction range:** Sets the maximum interaction range. This can be used to prevent throwing a grenade in a vehicle that has moved 100m away during the time you started the interaction.
-* **Damage dealt to units:** Allows the setting of the ACE damage applied to the crew of the target vehicle. The damage is applied randomly by both the function and the ACE damage function.
-* **Damage dealt to hull:** Sets the amount of damage the hull will take from one grenade.
-* **Damage dealt to engine:** Sets the amount of damage the engine will take from one grenade.
-* **Damage dealt to turret:** Sets the amount of damage the turret will take from one grenade.
+* **Damage dealt to crew:** Allows the setting of the ACE damage applied to the crew of the target vehicle. The damage is applied randomly by both the function and the ACE damage function.
+* **Force crew dismount:** Forces the crew to dismount, regardless of the vehicle damage. This option allows the vehicle to not have to be disabled in order for AI to dismount.
+* **Damage dealt to vehicle's hull:** Sets the amount of damage the hull will take from one grenade.
+* **Damage dealt to vehicle's engine:** Sets the amount of damage the engine will take from one grenade.
+* **Damage dealt to vehicle's turret:** Sets the amount of damage the turret will take from one grenade.
 * **Maximum hull damage allowed:** Sets the maximum amount of damage to the hull that can be made by multiple interactions.
 * **Maximum engine damage allowed:** Sets the maximum amount of damage to the engine that can be made by multiple interactions.
 * **Maximum turret damage allowed:** Sets the maximum amount of damage to the turret that can be made by multiple interactions.
@@ -27,3 +29,10 @@ Multiple CBA settings for customization:
 ## Credit
 
 <b>Launchman</b> for making the [original mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2398240266) and allowing me to edit his version, many thanks!
+
+## How to create PBOs
+
+* Download hemtt from [here](https://brettmayson.github.io/HEMTT/#/)
+* Place hemtt.exe inside the project folder (same level as addons)
+* Open commmand terminal, navigate to said folder (Windows: cd <insert path>)
+* Type "hemtt build --release"
