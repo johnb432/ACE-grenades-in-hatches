@@ -7,12 +7,17 @@
     // Don't apply damage to unit if invulnerable
     if (!isDamageAllowed _unit) exitWith {};
 
-    [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade"] call ace_medical_fnc_addDamageToUnit;
+    // If ACE is loaded on the client, use that to do damage
+    if (GVAR(damageType) && {isClass (configFile >> "CfgPatches" >> "ace_medical")}) then {
+        [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade"] call ace_medical_fnc_addDamageToUnit;
+    } else {
+        _unit setDamage ((damage _unit) + GVAR(damageDealtCrewVanilla));
+    };
 }] call CBA_fnc_addEventHandler;
 
 // Local event raised when progressbar is done
 [QGVAR(dropGrenadeEvent), {
-    (_this select 0) params ["_player", "_target"];
+    (_this select 0) params ["_unit", "_target"];
 
     private _players = (crew _target) select {isPlayer _x};
 
@@ -22,151 +27,111 @@
     };
 
     // Play grenade pin pulling sound
-    playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _target, false, getPos _target, 5, 1, 20];
+    playSound3D ["A3\sounds_f\weapons\grenades\Grenade_PullPin.wss", _target, false, getPos _target, 5, 1, 20];
 
-    // removeMagazine makes UI buggy
-    _player removeItem ((GVAR(allowedGrenades) arrayIntersect (magazines _player)) select 0);
+    // Play grenade falling into hatch sound, if delay allows it
+    if (GVAR(delayExplosion) >= 1) then {
+        [{
+            playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _this, false, getPos _this, 5, 1, 20];
+        }, _target, 1] call CBA_fnc_waitAndExecute;
+    };
 
-    [QGVAR(vehicleDamage), [_player, _target], _target] call CBA_fnc_targetEvent;
+    private _currentThrowable = currentThrowable _unit;
+
+    // Remove the selected grenade if it's in the list, otherwise find a compatible one; removeMagazine makes UI buggy
+    if (_currentThrowable isNotEqualTo [] && {_currentThrowable select 0 in GVAR(allowedGrenades)}) then {
+        _unit removeItem (_currentThrowable select 0);
+    } else {
+        _unit removeItem ((GVAR(allowedGrenades) arrayIntersect (magazines _unit)) select 0);
+    };
+
+    [QGVAR(vehicleDamage), _target, _target] call CBA_fnc_targetEvent;
 }] call CBA_fnc_addEventHandler;
 
 // Has to be done using an event, because setHitPointDamage isn't working as described on the wiki page
 [QGVAR(vehicleDamage), {
-    params ["_player", "_target"];
-
     [{
-        params ["_player", "_target"];
+        params ["_target"];
 
-        private _explosion = "mini_Grenade" createVehicle [0, 0, 0];
-        _explosion attachTo [_target, [0, 0, -1]];
-        _explosion setShotParents [_player, _player];
-        _explosion setDamage 1;
+        // Play grenade explosion sound globally
+        playSound3D ["A3\Sounds_F\arsenal\explosives\grenades\Explosion_HE_grenade_01.wss", _target];
 
-        [{
-            (_this select 0) isEqualTo objNull
-        }, {
-            params ["_explosion", "_target"];
+        // Add grenade blowing up effect; Must be done on each client
+        (getPos _target) remoteExecCall [QFUNC(grenadeEffect), call CBA_fnc_players];
 
-            private _arrayDamages = [GVAR(damageDealtEngine), GVAR(damageDealtHull), GVAR(damageDealtTurret)];
-            private _arrayMaxDamages = [GVAR(damageDealtEngineMax), GVAR(damageDealtHullMax), GVAR(damageDealtTurretMax)];
-            private _currentDamage;
-            private _calculatedDamage;
-            private _maxDamage;
+        private _arrayDamages = [GVAR(damageDealtEngine), GVAR(damageDealtHull), GVAR(damageDealtTurret)];
+        private _arrayMaxDamages = [GVAR(damageDealtEngineMax), GVAR(damageDealtHullMax), GVAR(damageDealtTurretMax)];
+        private _currentDamage;
+        private _calculatedDamage;
+        private _maxDamage;
 
-            // Apply damage
-            {
-                _currentDamage = _target getHitPointDamage _x;
-                _calculatedDamage = _currentDamage + (_arrayDamages select _forEachIndex);
-                _maxDamage = _arrayMaxDamages select _forEachIndex;
+        // Apply damage
+        {
+            _currentDamage = _target getHitPointDamage _x;
+            _calculatedDamage = _currentDamage + (_arrayDamages select _forEachIndex);
+            _maxDamage = _arrayMaxDamages select _forEachIndex;
 
-                if (_currentDamage > _maxDamage) then {
-                    _calculatedDamage = _currentDamage;
-                };
-
-                _target setHitPointDamage [_x, (_maxDamage min _calculatedDamage)];
-            } forEach ["hitEngine", "hitHull", "hitTurret"];
-
-            private _crew = crew _target;
-
-            if (GVAR(damageDealtCrew) isNotEqualTo 0) then {
-                private _allBodyParts = ["Head", "Body", "LeftArm", "RightArm", "LeftLeg", "RightLeg"];
-
-                // Use event in case the crew isn't local; e.g, 2+ players in one vehicle
-                {
-                    [QGVAR(medicalDamage), [_x, selectRandom _allBodyParts], _x] call CBA_fnc_targetEvent;
-                } forEach _crew;
+            if (_currentDamage > _maxDamage) then {
+                _maxDamage = _currentDamage;
             };
 
-            // If vehicle is immobile or forceCrewDismount is true, continue and do stuff with weapons
-            if (canMove _target && !GVAR(forceCrewDismount)) exitWith {};
+            _target setHitPointDamage [_x, _maxDamage min _calculatedDamage];
+        } forEach ["hitEngine", "hitHull", "hitTurret"];
 
-            // Get rid of weapons in vehicles, so that AI stop shooting
-            private _turretWeapons;
+        private _crew = crew _target;
+        private _allBodyParts = ["Head", "Body", "LeftArm", "RightArm", "LeftLeg", "RightLeg"];
 
-            {
-                _x params ["_unit", "_role", "", "_turretPath"];
+        // Use event in case the crew isn't local; e.g, 2+ players in one vehicle
+        {
+            [QGVAR(medicalDamage), [_x, selectRandom _allBodyParts], _x] call CBA_fnc_targetEvent;
+        } forEach _crew;
 
-                // Don't include driver position
-                if (_role isEqualTo "driver") then {
-                     continue;
-                };
+        // If vehicle is immobile or forceCrewDismount is true, set units to hold fire
+        if (!GVAR(forceCrewDismount) && {canMove _target}) exitWith {};
 
-                // Get the unit's turret's weapons
-                _turretWeapons = _target weaponsTurret _turretPath;
-                _unit setVariable [QGVAR(turretPath), _turretPath, true];
-                _unit setVariable [QGVAR(turretWeapons), _turretWeapons, true];
+        // Make a separate group; This is to enforce no firing until dismounted
+        private _group = group _target;
+        private _tempGroup = createGroup [side _group, true];
+        _crew joinSilent _tempGroup;
+        _tempGroup setCombatMode "BLUE";
 
-                // Remove all weapons from unit's turret
-                {
-                    _target removeWeaponTurret [_x, _turretPath];
-                } forEach _turretWeapons;
-            } forEach fullCrew [_target, "", false];
+        // Force them to dismount and stay out of vehicle
+        _crew allowGetIn false;
 
+        {
             [{
-                params ["_crew", "_target"];
+                params ["_args", "_handleID"];
+                _args params ["_unit", "_target", "_group"];
 
-                // Forces the crew to dismount and stay dismounted, if option is enabled
-                {
+                // If unit has dismounted, is dead or has been deleted
+                if (isNull objectParent _unit || {!alive _unit} || {isNull _unit}) exitWith {
+                    _handleID call CBA_fnc_removePerFrameHandler;
+
+                    if (isNull _unit || {!alive _unit}) exitWith {};
+
+                    // If unit has dismounted, set combat mode and rejoin group if possible
                     [{
-                        params ["_args", "_handleid"];
-                        _args params ["_unit", "_target"];
+                        params ["_unit", "_group"];
 
-                        // If crew member died, dismounted or if vehicle has been destroyed, stop checking
-                        if (!alive _unit || isNull objectParent _unit || isNull _target) exitWith {
-                            // Remove PFH
-                            _handleid call CBA_fnc_removePerFrameHandler;
+                        // Set unit back to "normal"; This command does not work with setting units to "BLUE"
+                        _unit setUnitCombatMode "YELLOW";
 
-                            // Get weapons and role
-                            private _turretPath = _unit getVariable [QGVAR(turretPath), []];
-                            private _turretWeapons = _unit getVariable [QGVAR(turretWeapons), []];
-
-                            // Delete variables
-                            _unit setVariable [QGVAR(turretPath), nil, true];
-                            _unit setVariable [QGVAR(turretWeapons), nil, true];
-
-                            // If not in a turret, don't add weapons back
-                            if (_turretPath isEqualTo [] || _turretWeapons isEqualTo []) exitWith {};
-
-                            // Add all weapons back to unit's turret
-                            {
-                                _target addWeaponTurret [_x, _turretPath];
-                            } forEach _turretWeapons;
+                        // Rejoin old group if it still exists
+                        if (!isNull _group) then {
+                            [_unit] joinSilent _group;
                         };
 
-                        // If unconscious, do not eject
-                        if (_unit getVariable ["ACE_isUnconscious", false]) exitWith {};
+                        // Stop unit from remounting again
+                        [_unit] allowGetIn false;
+                    }, [_unit, _group], 3] call CBA_fnc_waitAndExecute;
+                };
 
-                        // Remove PFH
-                        _handleid call CBA_fnc_removePerFrameHandler;
+                // Force crew to dismount if they are conscious
+                if (_unit getVariable ["ACE_isUnconscious", false] || {lifeState _unit isEqualTo "INCAPACITATED"}) exitWith {};
 
-                        // Eject unit from vehicle
-                        _unit action ["Eject", _target];
-
-                        // Enable the weapons after 3 seconds again. Prevents AI from firing while dismounting.
-                        [{
-                            params ["_unit", "_target"];
-
-                            // Get weapons and role
-                            private _turretPath = _unit getVariable [QGVAR(turretPath), []];
-                            private _turretWeapons = _unit getVariable [QGVAR(turretWeapons), []];
-
-                            // Delete variables
-                            _unit setVariable [QGVAR(turretPath), nil, true];
-                            _unit setVariable [QGVAR(turretWeapons), nil, true];
-
-                            // If not in a turret, don't add weapons back
-                            if (_turretPath isEqualTo [] || _turretWeapons isEqualTo []) exitWith {};
-
-                            // Add all weapons back to unit's turret
-                            {
-                                _target addWeaponTurret [_x, _turretPath];
-                            } forEach _turretWeapons;
-                        }, [_unit, _target], 3] call CBA_fnc_waitAndExecute;
-                    }, 1, [_x, _target]] call CBA_fnc_addPerFrameHandler;
-                } forEach _crew;
-
-                _crew allowGetIn false;
-            }, [_crew, _target], 3] call CBA_fnc_waitAndExecute;
-        }, [_explosion, _target]] call CBA_fnc_waitUntilAndExecute;
-    }, [_player, _target], GVAR(delayExplosion) - 5] call CBA_fnc_waitAndExecute;
+                // Eject unit from vehicle
+                _unit action ["Eject", _target];
+            }, 0.5, [_x, _target, _group]] call CBA_fnc_addPerFrameHandler;
+        } forEach _crew;
+    }, _this, GVAR(delayExplosion)] call CBA_fnc_waitAndExecute;
 }] call CBA_fnc_addEventHandler;
