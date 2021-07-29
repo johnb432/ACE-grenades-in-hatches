@@ -1,5 +1,4 @@
 #include "script_component.hpp"
-
 /*
  * Author: johnb43, Launchman
  * Checks if the interaction can be used.
@@ -17,10 +16,11 @@
  * Public: No
  */
 
-params ["_player", "_target"];
+params ["_unit", "_target"];
 
 // See if player has required grenades, whether sides are not the same and whether vehicle is in blacklist
-if (count (GVAR(allowedGrenades) arrayIntersect (magazines _player)) isEqualTo 0 || {!([side _player, side _target] call BIS_fnc_sideIsEnemy)} || {(typeOf _target) in GVAR(blacklistVehicles)}) exitWith {false};
+if (!([side _unit, side _target] call BIS_fnc_sideIsEnemy) || {count (GVAR(allowedGrenades) arrayIntersect (magazines _unit)) isEqualTo 0} || {(typeOf _target) in GVAR(blacklistVehicles)}) exitWith {false};
+
 // Checks behaviour for behaviour whitelist
 if !(behaviour _target in GVAR(allowedBehavior)) exitWith {false};
 
