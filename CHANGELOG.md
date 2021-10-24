@@ -1,3 +1,9 @@
+# Changelog for ACE Grenades in hatches 24.10.2021
+
+1.2.3.1
+- Added mod icon.
+- Minor improvements.
+
 # Changelog for ACE Grenades in hatches 29.7.2021
 
 1.2.3.0

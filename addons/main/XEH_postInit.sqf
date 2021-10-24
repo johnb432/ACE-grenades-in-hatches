@@ -2,14 +2,14 @@
 
 // Injures a unit only if allowDamage is true
 [QGVAR(medicalDamage), {
-    params ["_unit", "_bodyPart"];
+    params ["_unit", "_bodyPart", "_instigator"];
 
     // Don't apply damage to unit if invulnerable
     if (!isDamageAllowed _unit) exitWith {};
 
     // If ACE is loaded on the client, use that to do damage
     if (GVAR(damageType) && {isClass (configFile >> "CfgPatches" >> "ace_medical")}) then {
-        [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade"] call ace_medical_fnc_addDamageToUnit;
+        [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade", _instigator] call ace_medical_fnc_addDamageToUnit;
     } else {
         _unit setDamage ((damage _unit) + GVAR(damageDealtCrewVanilla));
     };
@@ -45,13 +45,13 @@
         _unit removeItem ((GVAR(allowedGrenades) arrayIntersect (magazines _unit)) select 0);
     };
 
-    [QGVAR(vehicleDamage), _target, _target] call CBA_fnc_targetEvent;
+    [QGVAR(vehicleDamage), [_target, _unit], _target] call CBA_fnc_targetEvent;
 }] call CBA_fnc_addEventHandler;
 
 // Has to be done using an event, because setHitPointDamage isn't working as described on the wiki page
 [QGVAR(vehicleDamage), {
     [{
-        params ["_target"];
+        (_this select 0) params ["_target", "_instigator"];
 
         // Play grenade explosion sound globally
         playSound3D ["A3\Sounds_F\arsenal\explosives\grenades\Explosion_HE_grenade_01.wss", _target];
@@ -83,7 +83,7 @@
 
         // Use event in case the crew isn't local; e.g, 2+ players in one vehicle
         {
-            [QGVAR(medicalDamage), [_x, selectRandom _allBodyParts], _x] call CBA_fnc_targetEvent;
+            [QGVAR(medicalDamage), [_x, selectRandom _allBodyParts, _instigator], _x] call CBA_fnc_targetEvent;
         } forEach _crew;
 
         // If vehicle is immobile or forceCrewDismount is true, set units to hold fire
