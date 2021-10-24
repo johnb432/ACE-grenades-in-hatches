@@ -39,8 +39,7 @@ Launchman for making the [url=https://steamcommunity.com/sharedfiles/filedetails
 
 [h2]How to create PBOs[/h2]
 [list]
-[*] Download hemtt from [url=https://brettmayson.github.io/HEMTT/#/]here[/url]
-[*] Place hemtt.exe inside the project folder (same level as addons)
-[*] Open command terminal, navigate to said folder (Windows: cd <insert path>)
-[*] Type "hemtt build --release"
+[*] Download and install hemtt from [url=https://github.com/BrettMayson/HEMTT]here[/url]
+[*] Open command terminal, navigate to said folder (Windows: cd 'insert path')
+[*] Type "hemtt build" for pbo, "hemtt build --release" for entire release
 [/list]
