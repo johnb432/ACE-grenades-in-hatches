@@ -28,9 +28,9 @@ class CfgMods {
         action = "https://github.com/johnb432/ACE-grenades-in-hatches";
         description = "A small mod that allows users to drop grenades into armored vehicles.";
         overview = "A small mod that allows users to drop grenades into armored vehicles.";
-        overviewPicture = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa"; // http://www.clipartbest.com/clipart-LTKkM9pxc
+        picture = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa"; // http://www.clipartbest.com/clipart-LTKkM9pxc
         logo = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";
-        picture = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";
+        overviewPicture = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";
     };
 };
 
