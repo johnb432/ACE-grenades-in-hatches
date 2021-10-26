@@ -13,6 +13,7 @@ class CfgPatches {
         };
         author = "johnb43";
         authors[] = {"Launchman", "johnb43"};
+        url = "https://github.com/johnb432/ACE-grenades-in-hatches";
         VERSION_CONFIG;
     };
 };
