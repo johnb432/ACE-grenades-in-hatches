@@ -1,5 +1,6 @@
 name = "ACE Grenades in hatches - Tweaked";
 author = "johnb43, Launchman";
+tooltip = "ACE Grenades in hatches - Tweaked";
 tooltipOwned = "ACE Grenades in hatches - Tweaked";
 hideName = 0;
 hidePicture = 0;
@@ -9,4 +10,6 @@ description = "A small mod that allows users to drop grenades into armored vehic
 overview = "A small mod that allows users to drop grenades into armored vehicles.";
 picture = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa"; // http://www.clipartbest.com/clipart-LTKkM9pxc
 logo = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";
+logoOver = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";
+logoSmall = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";
 overviewPicture = "\x\grenades_hatches\addons\main\ui\logo_ace_grenades_in_hatches_tweaked.paa";

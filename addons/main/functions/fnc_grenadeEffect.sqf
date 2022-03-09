@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+
 /*
  * Author: Larrow, johnb43
  * Spawns a grenade effect.

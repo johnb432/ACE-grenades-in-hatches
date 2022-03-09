@@ -4,14 +4,21 @@
 [QGVAR(medicalDamage), {
     params ["_unit", "_bodyPart", "_instigator"];
 
-    // Don't apply damage to unit if invulnerable
-    if (!isDamageAllowed _unit) exitWith {};
-
     // If ACE is loaded on the client, use that to do damage
     if (GVAR(damageType) && {isClass (configFile >> "CfgPatches" >> "ace_medical")}) then {
-        [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade", _instigator] call ace_medical_fnc_addDamageToUnit;
+        [_unit, GVAR(damageDealtCrew), _bodyPart, "grenade", _instigator, [], false] call ace_medical_fnc_addDamageToUnit;
     } else {
-        _unit setDamage ((damage _unit) + GVAR(damageDealtCrewVanilla));
+        {
+            _unit setHitPointDamage [_x, (_unit getHitPointDamage _x) + GVAR(damageDealtCrewVanilla), true, _instigator];
+        } forEach (switch (toLower _bodyPart) do {
+            case "head": {["hitface", "hitneck", "hithead"]};
+            case "body": {["hitpelvis", "hitabdomen", "hitdiaphragm", "hitchest", "hitbody"]};
+            case "leftarm";
+            case "rightarm": {["hitarms", "hithands"]};
+            case "leftleg";
+            case "rightleg": {["hitlegs"]};
+            default {[]};
+        });
     };
 }] call CBA_fnc_addEventHandler;
 
@@ -23,32 +30,32 @@
 
     // If a player amoung the crew, inform them of the grenade
     if (_players isNotEqualTo []) then {
-        ["Someone threw a grenade into the hatch!!!", true, GVAR(delayExplosion) min 5, 10] remoteExecCall ["ace_common_fnc_displayText", _players];
+        [LLSTRING(grenadeThrownInHatchHint), true, GVAR(delayExplosion) min 5, 10] remoteExecCall ["ace_common_fnc_displayText", _players];
     };
 
     // Play grenade pin pulling sound
-    playSound3D ["A3\sounds_f\weapons\grenades\Grenade_PullPin.wss", _target, false, getPos _target, 5, 1, 20];
+    playSound3D ["A3\sounds_f\weapons\grenades\Grenade_PullPin.wss", _target, false, getPosASL _target, 5, 1, 20];
 
     // Play grenade falling into hatch sound, if delay allows it
     if (GVAR(delayExplosion) >= 1) then {
         [{
-            playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _this, false, getPos _this, 5, 1, 20];
+            playSound3D ["A3\Sounds_F\weapons\Grenades\handgrenade_drops\handg_drop_Metal_2.wss", _this, false, getPosASL _this, 5, 1, 20];
         }, _target, 1] call CBA_fnc_waitAndExecute;
     };
 
-    private _currentThrowable = currentThrowable _unit;
+    private _currentThrowable = (currentThrowable _unit) param [0, ""];
 
     // Remove the selected grenade if it's in the list, otherwise find a compatible one; removeMagazine makes UI buggy
-    if (_currentThrowable isNotEqualTo [] && {_currentThrowable select 0 in GVAR(allowedGrenades)}) then {
-        _unit removeItem (_currentThrowable select 0);
+    if (_currentThrowable isNotEqualTo "" && {(GVAR(allowedGrenades) findIf {_currentThrowable == _x}) isNotEqualTo -1}) then {
+        _unit removeItem _currentThrowable;
     } else {
-        _unit removeItem ((GVAR(allowedGrenades) arrayIntersect (magazines _unit)) select 0);
+        _unit removeItem (((GVAR(allowedGrenades) apply {toLower _x}) arrayIntersect (magazines _unit apply {toLower _x})) select 0);
     };
 
     [QGVAR(vehicleDamage), [_target, _unit], _target] call CBA_fnc_targetEvent;
 }] call CBA_fnc_addEventHandler;
 
-// Has to be done using an event, because setHitPointDamage isn't working as described on the wiki page
+// Has to be done using an event, because setHitPointDamage needs to be executed locally
 [QGVAR(vehicleDamage), {
     [{
         (_this select 0) params ["_target", "_instigator"];
@@ -57,7 +64,7 @@
         playSound3D ["A3\Sounds_F\arsenal\explosives\grenades\Explosion_HE_grenade_01.wss", _target];
 
         // Add grenade blowing up effect; Must be done on each client
-        (getPos _target) remoteExecCall [QFUNC(grenadeEffect), call CBA_fnc_players];
+        (ASLToAGL getPosASL _target) remoteExecCall [QFUNC(grenadeEffect), call CBA_fnc_players];
 
         private _arrayDamages = [GVAR(damageDealtEngine), GVAR(damageDealtHull), GVAR(damageDealtTurret)];
         private _arrayMaxDamages = [GVAR(damageDealtEngineMax), GVAR(damageDealtHullMax), GVAR(damageDealtTurretMax)];
@@ -101,7 +108,7 @@
         {
             [{
                 params ["_args", "_handleID"];
-                _args params ["_unit", "_target", "_group"];
+                _args params ["_unit", "_group"];
 
                 // If unit has dismounted, is dead or has been deleted
                 if (isNull objectParent _unit || {!alive _unit} || {isNull _unit}) exitWith {
@@ -127,11 +134,11 @@
                 };
 
                 // Force crew to dismount if they are conscious
-                if (_unit getVariable ["ACE_isUnconscious", false] || {lifeState _unit isEqualTo "INCAPACITATED"}) exitWith {};
+                if (_unit getVariable ["ACE_isUnconscious", false] || {(lifeState _unit) isEqualTo "INCAPACITATED"}) exitWith {};
 
                 // Eject unit from vehicle
-                _unit action ["Eject", _target];
-            }, 0.5, [_x, _target, _group]] call CBA_fnc_addPerFrameHandler;
+                moveOut _unit;
+            }, 0.5, [_x, _group]] call CBA_fnc_addPerFrameHandler;
         } forEach _crew;
     }, _this, GVAR(delayExplosion)] call CBA_fnc_waitAndExecute;
 }] call CBA_fnc_addEventHandler;
