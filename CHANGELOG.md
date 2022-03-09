@@ -1,3 +1,13 @@
+# Changelog for ACE Grenades in hatches 9.3.2022
+
+1.2.3.2
+- Added support for 2.08.
+- Added stringtable for multilingual support.
+- Fixed sound issue where sound was not playing at right location.
+- Interaction can be now added to any vehicle via whitelist settings. Default is what the mod had before this change (so all tanks and wheeled APCs).
+- Vanilla medical damage is now done to individual hit points.
+- CBA Settings are no longer case sensitive.
+
 # Changelog for ACE Grenades in hatches 24.10.2021
 
 1.2.3.1

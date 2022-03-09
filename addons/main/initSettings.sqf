@@ -1,195 +1,258 @@
 [
     QGVAR(damageType),
     "LIST",
-    ["Damage type applied to Crew", "Applies either ACE or Vanilla damage to crew.\nIf ACE is not loaded, it will not apply ACE damage."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageType), LLSTRING(damageType_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [[true, false], ["ACE", "Vanilla"], 0]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtCrew),
     "SLIDER",
-    ["ACE Damage dealt to Crew", "0 for no damage, 0-0.5 for minor, 0.5-0.75 for medium and 0.75+ for large wounds."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtCrew), LLSTRING(damageDealtCrew_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 30, 5, 2]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtCrewVanilla),
     "SLIDER",
-    ["Vanilla Damage dealt to Crew", "If ACE Medical is not loaded or the setting 'Damage Type' is set to 'Vanilla', this number will be chosen."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtCrewVanilla), LLSTRING(damageDealtCrewVanilla_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 0.25, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(forceCrewDismount),
     "CHECKBOX",
-    ["Force Crew dismount", "Forces the crew to dismount, regardless of vehicle damage."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(forceCrewDismount), LLSTRING(forceCrewDismount_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     false
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtHull),
     "SLIDER",
-    ["Damage dealt to vehicle's Hull", "Damage dealt with one interaction. Percentage value."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtHull), LLSTRING(damageDealtHull_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtEngine),
     "SLIDER",
-    ["Damage dealt to vehicle's Engine", "Damage dealt with one interaction. Percentage value."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtEngine), LLSTRING(damageDealtEngine_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtTurret),
     "SLIDER",
-    ["Damage dealt to vehicle's Turret", "Damage dealt with one interaction. Percentage value."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtTurret), LLSTRING(damageDealtTurret_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtHullMax),
     "SLIDER",
-    ["Maximum Hull Damage allowed", "Maximum damage that can be dealt to vehicle's hull with multiple interactions. Percentage value."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtHullMax), LLSTRING(damageDealtHullMax_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtEngineMax),
     "SLIDER",
-    ["Maximum Engine Damage allowed", "Maximum damage that can be dealt to vehicle's engine with multiple interactions. Percentage value."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtEngineMax), LLSTRING(damageDealtEngineMax_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(damageDealtTurretMax),
     "SLIDER",
-    ["Maximum Turret Damage allowed", "Maximum damage that can be dealt to vehicle's turret with multiple interactions. Percentage value."],
-    [COMPONENT_NAME, "Damages"],
+    [LLSTRING(damageDealtTurretMax), LLSTRING(damageDealtTurretMax_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(allowedGrenadesSetting),
     "EDITBOX",
-    ["Compatible Grenades", "The array of classnames of grenades that can be used. Can be added to and modified. Format is an array of strings."],
-    [COMPONENT_NAME, "Lists"],
+    [LLSTRING(allowedGrenadesSetting), LLSTRING(allowedGrenadesSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
     "['HandGrenade','MiniGrenade']",
     false,
     {
-        if (GVAR(allowedGrenadesSetting) isEqualTo "") exitWith {
+        if (_this isEqualTo "") exitWith {
             GVAR(allowedGrenades) = [];
             GVAR(allowedGrenadesSetting) = "[]";
         };
 
-        GVAR(allowedGrenades) = parseSimpleArray GVAR(allowedGrenadesSetting);
+        GVAR(allowedGrenades) = parseSimpleArray _this;
     }
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(blacklistVehiclesSetting),
     "EDITBOX",
-    ["Vehicle Blacklist (no Inheritance)", "A blacklist for specific object types."],
-    [COMPONENT_NAME, "Lists"],
+    [LLSTRING(blacklistVehiclesSetting), LLSTRING(blacklistVehiclesSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
     "[]",
     false,
     {
-        if (GVAR(blacklistVehiclesSetting) isEqualTo "") exitWith {
+        if (_this isEqualTo "") exitWith {
             GVAR(blacklistVehicles) = [];
             GVAR(blacklistVehiclesSetting) = "[]";
         };
 
-        GVAR(blacklistVehicles) = parseSimpleArray GVAR(blacklistVehiclesSetting);
+        GVAR(blacklistVehicles) = parseSimpleArray _this;
     }
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(blacklistVehiclesInheritanceSetting),
     "EDITBOX",
-    ["Vehicle Blacklist (with Inheritance)", "A blacklist for an object and all of it's children."],
-    [COMPONENT_NAME, "Lists"],
+    [LLSTRING(blacklistVehiclesInheritanceSetting), LLSTRING(blacklistVehiclesInheritanceSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
     "[]",
     false,
     {
-        if (GVAR(blacklistVehiclesInheritanceSetting) isEqualTo "") exitWith {
+        if (_this isEqualTo "") exitWith {
             GVAR(blacklistVehiclesInheritance) = [];
             GVAR(blacklistVehiclesInheritanceSetting) = "[]";
         };
 
-        GVAR(blacklistVehiclesInheritance) = parseSimpleArray GVAR(blacklistVehiclesInheritanceSetting);
+        GVAR(blacklistVehiclesInheritance) = parseSimpleArray _this;
+    }
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(whitelistVehiclesSetting),
+    "EDITBOX",
+    [LLSTRING(whitelistVehiclesSetting), LLSTRING(whitelistVehiclesSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
+    "[]",
+    false,
+    {
+        if (_this isEqualTo "") exitWith {
+            GVAR(whitelistVehicles) = [];
+            GVAR(whitelistVehiclesSetting) = "[]";
+        };
+
+        GVAR(whitelistVehicles) = parseSimpleArray _this;
+    }
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(whitelistVehiclesInheritanceSetting),
+    "EDITBOX",
+    [LLSTRING(whitelistVehiclesInheritanceSetting), LLSTRING(whitelistVehiclesInheritanceSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
+    "['Tank','Wheeled_Apc_F']",
+    false,
+    {
+        private _setting = if (_this isEqualTo "") then {
+            GVAR(whitelistVehiclesInheritanceSetting) = "[]";
+            [];
+        } else {
+            parseSimpleArray _this;
+        };
+
+        // Make case insensitive
+        _setting = _setting apply {toLower _x};
+
+        // Add classes
+        {
+            [_x, 0, ["ACE_MainActions"], GVAR(actionACE), true] call ace_interact_menu_fnc_addActionToClass;
+        } forEach (_setting - GVAR(whitelistVehiclesInheritance));
+
+        private _type = "";
+        private _index = -1;
+
+        // Remove classes
+        {
+            _type = _x;
+            _index = ace_interact_menu_inheritedActionsAll find [_type, 0, ["ACE_MainActions"], GVAR(actionACE)];
+
+            if (_index isNotEqualTo -1) then {
+                ace_interact_menu_inheritedActionsAll deleteAt _index;
+            };
+
+            {
+                if (_x isKindOf _type) then {
+                    [_x, 0, ["ACE_MainActions", QGVAR(dropGrenade)]] call ace_interact_menu_fnc_removeActionFromClass;
+                };
+            } forEach ace_interact_menu_inheritedClassesAll;
+        } forEach (GVAR(whitelistVehiclesInheritance) - _setting);
+
+        GVAR(whitelistVehiclesInheritance) = _setting;
     }
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(allowedBehaviorSetting),
     "EDITBOX",
-    ["Target Awareness", "The array of allowed behavior types that the target crew must have in order to throw in a grenade. Format is an array of strings. Default contains all behavior possibilities."],
-    [COMPONENT_NAME, "Lists"],
+    [LLSTRING(allowedBehaviorSetting), LLSTRING(allowedBehaviorSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
     "['CARELESS','SAFE','AWARE','COMBAT','STEALTH']",
     false,
     {
-        if (GVAR(allowedBehaviorSetting) isEqualTo "") exitWith {
+        if (_this isEqualTo "") exitWith {
             GVAR(allowedBehavior) = [];
             GVAR(allowedBehaviorSetting) = "[]";
         };
 
-        GVAR(allowedBehavior) = parseSimpleArray GVAR(allowedBehaviorSetting);
+        GVAR(allowedBehavior) = parseSimpleArray _this;
     }
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(disablePlayerAmbush),
     "CHECKBOX",
-    ["Disable Player controlled Targets to be attacked", "If a player is part of the target's crew, then disable the usage of this interaction."],
-    [COMPONENT_NAME, "Player"],
+    [LLSTRING(disablePlayerAmbush), LLSTRING(disablePlayerAmbush_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(player)],
     false
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(distanceInteraction),
     "SLIDER",
-    ["Interaction Range", "Sets the maximum interaction range."],
-    [COMPONENT_NAME, "Player"],
+    [LLSTRING(distanceInteraction), LLSTRING(distanceInteraction_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(player)],
     [2, 100, 10, 1]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(delayExplosion),
     "SLIDER",
-    ["Delay to Explosion", "Sets the delay of explosion after the explosive has been used."],
-    [COMPONENT_NAME, "Timings"],
+    [LLSTRING(delayExplosion), LLSTRING(delayExplosion_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(timings)],
     [0, 20, 5, 1]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(delayInteraction),
     "SLIDER",
-    ["Interaction Time", "Sets the length of the interaction. It's the minimum if 'Enable Knowledge Multiplier' is enabled."],
-    [COMPONENT_NAME, "Timings"],
+    [LLSTRING(delayInteraction), LLSTRING(delayInteraction_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(timings)],
     [0.5, 10, 3, 1]
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(enableKnowledgeMultiplier),
     "CHECKBOX",
-    ["Enable Knowledge Multiplier", "Enables the setting below.\nIf the target 'knowsAbout' a unit, it will take longer according to the the result of 'knowsAbout'."],
-    [COMPONENT_NAME, "Timings"],
+    [LLSTRING(enableKnowledgeMultiplier), LLSTRING(enableKnowledgeMultiplier_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(timings)],
     false
 ] call CBA_fnc_addSetting;
 
 [
     QGVAR(knowledgeMultiplier),
     "SLIDER",
-    ["Knowledge Multiplier", "This will set the upper limit of the linear conversion.\nThe conversion is: [0, 4] -> [1, this setting]."],
-    [COMPONENT_NAME, "Timings"],
+    [LLSTRING(knowledgeMultiplier), LLSTRING(knowledgeMultiplier_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(timings)],
     [1, 30, 5, 2]
 ] call CBA_fnc_addSetting;

@@ -18,6 +18,8 @@ The search for a compatible grenade will start by looking at the currently chose
 * **Allowed Grenades:** Allows the user to define which grenades can be used for the action.
 * **Vehicle Blacklist (no Inheritance):** Any vehicle in this list will not have the action enabled. It will only disable the vehicle itself and not its children (which means any classes that inherit from that class).
 * **Vehicle Blacklist (with Inheritance):** Any vehicle and their children in this list will not have the action enabled. You can use this setting to more easily blacklist a family of vehicles.
+* **Vehicle Whitelist (no Inheritance):** Any vehicle in this list will have the action enabled, if the setting below has added the interaction to that class (see whitelist examples). It will only enable the vehicle itself and not its children.
+* **Vehicle Whitelist (with Inheritance):** Any vehicle and their children in this list will have the action enabled. You can use this setting to more easily whitelist a family of vehicles.
 * **Target Awareness:** The target's crew must be in one of the behaviour states defined in the array in order to be able to use the interaction.
 * **Disable Player controlled Targets to be attacked:** If this setting is set to true, any target that has at least 1 player in it will not be able to be ambushed.
 * **Interaction Range:** Sets the maximum interaction range. This can be used to prevent throwing a grenade in a vehicle that has moved 100m away during the time you started the interaction.
@@ -26,10 +28,28 @@ The search for a compatible grenade will start by looking at the currently chose
 * **Enable Knowledge Multiplier:** If this is enabled, it will apply the setting's multiplier that is below.
 * **Knowledge Multiplier:** This is the upper limit to a linear conversion. 'knowsAbout' returns values in [0, 4] which are then converted to [1, this setting]. The resulting value of the linear conversion is multiplied with the interaction time setting to give the final interaction time.
 
+<h2>Whitelist Examples</h2>
+
+If you want to just whitelist e.g. `["B_APC_Wheeled_01_cannon_F"]`.:
+- Set both CBA whitelist settings to `["B_APC_Wheeled_01_cannon_F"]`.
+
+If you want to whitelist multiple vehicles e.g `["B_APC_Wheeled_01_cannon_F","B_MBT_01_TUSK_F"]`:
+- Set "no Inheritance" to `["B_APC_Wheeled_01_cannon_F","B_MBT_01_TUSK_F"]`
+- Set "with Inheritance" to either the above aswell or `["AllVehicles"]` (or the lowest common parent - which would be `"LandVehicle"` in this case)
+
+<h2>Grenade List Examples</h2>
+- Vanilla: ["HandGrenade","MiniGrenade"]
+- RHS: ["rhs_mag_rgd5","rhs_mag_rgn","rhs_mag_rgo","rhs_grenade_m1939e_mag","rhs_grenade_m1939l_mag","rhs_grenade_m1939e_f_mag","rhs_grenade_m1939l_f_mag","rhs_mag_f1","rhs_grenade_mkii_mag","rhsgref_mag_rkg3em","rhs_charge_sb3kg_mag","rhs_grenade_sthgr24_mag","rhs_grenade_sthgr24_heerfrag_mag","rhs_grenade_sthgr24_SSfrag_mag","rhs_grenade_sthgr24_x7bundle_mag","rhs_grenade_sthgr43_mag","rhs_grenade_sthgr43_heerfrag_mag","rhs_grenade_sthgr43_SSfrag_mag","rhs_charge_tnt_x2_mag","rhs_grenade_khattabka_vog17_mag","rhs_grenade_khattabka_vog25_mag","rhssaf_mag_br_m75","rhssaf_mag_br_m84","rhssaf_mag_brk_m79","rhs_mag_m67"]
+- BWA: ["BWA3_DM51A1"]
+- FOW: ["fow_e_mk2","fow_e_m24K_spli","fow_e_m24_at","fow_e_m24_spli","fow_e_m24","fow_e_m24K","fow_e_no36mk1","fow_e_no69","fow_e_no73","fow_e_no82","fow_e_tnt_halfpound","fow_e_type97","fow_e_type99","fow_e_type99_at"]
+- IFA: ["LIB_F1","LIB_Shg24","LIB_Shg24x7","LIB_M39","LIB_US_Mk_2","LIB_MillsBomb","LIB_No82","LIB_Pwm","LIB_Rg42","LIB_Rpg6"]
+- CSA: ["CSA38_eh39","CSA38_eh392","CSA38_eh393","CSA38_F1","CSA38_rg21","CSA38_rg34","CSA38_rg38","CSA38_shg24","CSA38_shg24t"]
+- EAW: ["EAW_Chinese_Grenade_Mag","EAW_Type91_Mag","EAW_Type91_Trans_Mag","EAW_Type97_Mag"]
+
 <h2>Links</h2>
 
-- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2418896377)<br/>
-- [GitHub](https://github.com/johnb432/ACE-grenades-in-hatches)
+* [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2418896377)
+* [GitHub](https://github.com/johnb432/ACE-grenades-in-hatches)
 
 <h2>Credit</h2>
 
