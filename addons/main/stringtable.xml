@@ -13,6 +13,10 @@
             <Original>Dropping Grenade in hatch</Original>
             <English>Dropping Grenade in hatch</English>
         </Key>
+        <Key ID="STR_grenades_hatches_main_grenadeNotFoundHint">
+            <Original>A compatible grenade couldn't be found!</Original>
+            <English>A compatible grenade couldn't be found!</English>
+        </Key>
         <Key ID="STR_grenades_hatches_main_grenadeThrownInHatchHint">
             <Original>Someone threw a grenade into the hatch!!!</Original>
             <English>Someone threw a grenade into the hatch!!!</English>

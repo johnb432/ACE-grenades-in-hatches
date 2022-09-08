@@ -91,7 +91,8 @@
             GVAR(allowedGrenadesSetting) = "[]";
         };
 
-        GVAR(allowedGrenades) = parseSimpleArray _this;
+        // Make sure to remove invalid entries
+        GVAR(allowedGrenades) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getItemConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -108,7 +109,8 @@
             GVAR(blacklistVehiclesSetting) = "[]";
         };
 
-        GVAR(blacklistVehicles) = parseSimpleArray _this;
+        // Make sure to remove invalid entries
+        GVAR(blacklistVehicles) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -125,7 +127,8 @@
             GVAR(blacklistVehiclesInheritanceSetting) = "[]";
         };
 
-        GVAR(blacklistVehiclesInheritance) = parseSimpleArray _this;
+        // Make sure to remove invalid entries
+        GVAR(blacklistVehiclesInheritance) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -142,7 +145,8 @@
             GVAR(whitelistVehiclesSetting) = "[]";
         };
 
-        GVAR(whitelistVehicles) = parseSimpleArray _this;
+        // Make sure to remove invalid entries
+        GVAR(whitelistVehicles) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -154,15 +158,8 @@
     "['Tank','Wheeled_Apc_F']",
     false,
     {
-        private _setting = if (_this isEqualTo "") then {
-            GVAR(whitelistVehiclesInheritanceSetting) = "[]";
-            [];
-        } else {
-            parseSimpleArray _this;
-        };
-
-        // Make case insensitive
-        _setting = _setting apply {toLower _x};
+        // Make config case and remove invalid entries
+        private _setting = ((if (_this isEqualTo "") then { GVAR(whitelistVehiclesInheritanceSetting) = "[]"; [] } else { parseSimpleArray _this }) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
 
         // Add classes
         {
@@ -170,16 +167,12 @@
         } forEach (_setting - GVAR(whitelistVehiclesInheritance));
 
         private _type = "";
-        private _index = -1;
 
         // Remove classes
         {
             _type = _x;
-            _index = ace_interact_menu_inheritedActionsAll find [_type, 0, ["ACE_MainActions"], GVAR(actionACE)];
 
-            if (_index isNotEqualTo -1) then {
-                ace_interact_menu_inheritedActionsAll deleteAt _index;
-            };
+            ace_interact_menu_inheritedActionsAll deleteAt (ace_interact_menu_inheritedActionsAll find [_type, 0, ["ACE_MainActions"], GVAR(actionACE)]);
 
             {
                 if (_x isKindOf _type) then {
@@ -205,7 +198,7 @@
             GVAR(allowedBehaviorSetting) = "[]";
         };
 
-        GVAR(allowedBehavior) = parseSimpleArray _this;
+        GVAR(allowedBehavior) = (parseSimpleArray _this) apply {toUpperANSI _x};
     }
 ] call CBA_fnc_addSetting;
 
