@@ -1,4 +1,4 @@
-# Changelog for ACE Grenades in hatches .2022
+# Changelog for ACE Grenades in hatches 8.9.2022
 
 1.2.3.3
 - Added support for 2.10.
