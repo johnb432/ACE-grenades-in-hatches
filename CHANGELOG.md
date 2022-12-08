@@ -1,3 +1,9 @@
+# Changelog for ACE Grenades in hatches 8.12.2022
+
+1.2.3.4
+- Changed how CBA whitelists and blacklists work.
+- Minor improvements.
+
 # Changelog for ACE Grenades in hatches 8.9.2022
 
 1.2.3.3

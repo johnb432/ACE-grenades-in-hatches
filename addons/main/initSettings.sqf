@@ -83,12 +83,12 @@
     "EDITBOX",
     [LLSTRING(allowedGrenadesSetting), LLSTRING(allowedGrenadesSetting_ToolTip)],
     [LLSTRING(nameMod), LLSTRING(lists)],
-    "['HandGrenade','MiniGrenade']",
-    false,
+    '["HandGrenade","MiniGrenade"]',
+    0,
     {
         if (_this isEqualTo "") exitWith {
             GVAR(allowedGrenades) = [];
-            GVAR(allowedGrenadesSetting) = "[]";
+            GVAR(allowedGrenadesSetting) = '[]';
         };
 
         // Make sure to remove invalid entries
@@ -97,52 +97,16 @@
 ] call CBA_fnc_addSetting;
 
 [
-    QGVAR(blacklistVehiclesSetting),
-    "EDITBOX",
-    [LLSTRING(blacklistVehiclesSetting), LLSTRING(blacklistVehiclesSetting_ToolTip)],
-    [LLSTRING(nameMod), LLSTRING(lists)],
-    "[]",
-    false,
-    {
-        if (_this isEqualTo "") exitWith {
-            GVAR(blacklistVehicles) = [];
-            GVAR(blacklistVehiclesSetting) = "[]";
-        };
-
-        // Make sure to remove invalid entries
-        GVAR(blacklistVehicles) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
-    }
-] call CBA_fnc_addSetting;
-
-[
-    QGVAR(blacklistVehiclesInheritanceSetting),
-    "EDITBOX",
-    [LLSTRING(blacklistVehiclesInheritanceSetting), LLSTRING(blacklistVehiclesInheritanceSetting_ToolTip)],
-    [LLSTRING(nameMod), LLSTRING(lists)],
-    "[]",
-    false,
-    {
-        if (_this isEqualTo "") exitWith {
-            GVAR(blacklistVehiclesInheritance) = [];
-            GVAR(blacklistVehiclesInheritanceSetting) = "[]";
-        };
-
-        // Make sure to remove invalid entries
-        GVAR(blacklistVehiclesInheritance) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
-    }
-] call CBA_fnc_addSetting;
-
-[
     QGVAR(whitelistVehiclesSetting),
     "EDITBOX",
     [LLSTRING(whitelistVehiclesSetting), LLSTRING(whitelistVehiclesSetting_ToolTip)],
     [LLSTRING(nameMod), LLSTRING(lists)],
-    "[]",
-    false,
+    '[]',
+    0,
     {
         if (_this isEqualTo "") exitWith {
             GVAR(whitelistVehicles) = [];
-            GVAR(whitelistVehiclesSetting) = "[]";
+            GVAR(whitelistVehiclesSetting) = '[]';
         };
 
         // Make sure to remove invalid entries
@@ -155,11 +119,16 @@
     "EDITBOX",
     [LLSTRING(whitelistVehiclesInheritanceSetting), LLSTRING(whitelistVehiclesInheritanceSetting_ToolTip)],
     [LLSTRING(nameMod), LLSTRING(lists)],
-    "['Tank','Wheeled_Apc_F']",
-    false,
+    '["Tank","Wheeled_Apc_F"]',
+    0,
     {
         // Make config case and remove invalid entries
-        private _setting = ((if (_this isEqualTo "") then { GVAR(whitelistVehiclesInheritanceSetting) = "[]"; [] } else { parseSimpleArray _this }) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
+        private _setting = ((if (_this isEqualTo "") then {
+            GVAR(whitelistVehiclesInheritanceSetting) = '[]';
+            []
+        } else {
+            parseSimpleArray _this
+        }) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
 
         // Add classes
         {
@@ -186,16 +155,52 @@
 ] call CBA_fnc_addSetting;
 
 [
+    QGVAR(blacklistVehiclesSetting),
+    "EDITBOX",
+    [LLSTRING(blacklistVehiclesSetting), LLSTRING(blacklistVehiclesSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
+    '[]',
+    0,
+    {
+        if (_this isEqualTo "") exitWith {
+            GVAR(blacklistVehicles) = [];
+            GVAR(blacklistVehiclesSetting) = '[]';
+        };
+
+        // Make sure to remove invalid entries
+        GVAR(blacklistVehicles) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
+    }
+] call CBA_fnc_addSetting;
+
+[
+    QGVAR(blacklistVehiclesInheritanceSetting),
+    "EDITBOX",
+    [LLSTRING(blacklistVehiclesInheritanceSetting), LLSTRING(blacklistVehiclesInheritanceSetting_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
+    '[]',
+    0,
+    {
+        if (_this isEqualTo "") exitWith {
+            GVAR(blacklistVehiclesInheritance) = [];
+            GVAR(blacklistVehiclesInheritanceSetting) = '[]';
+        };
+
+        // Make sure to remove invalid entries
+        GVAR(blacklistVehiclesInheritance) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
+    }
+] call CBA_fnc_addSetting;
+
+[
     QGVAR(allowedBehaviorSetting),
     "EDITBOX",
     [LLSTRING(allowedBehaviorSetting), LLSTRING(allowedBehaviorSetting_ToolTip)],
     [LLSTRING(nameMod), LLSTRING(lists)],
-    "['CARELESS','SAFE','AWARE','COMBAT','STEALTH']",
-    false,
+    '["CARELESS","SAFE","AWARE","COMBAT","STEALTH"]',
+    0,
     {
         if (_this isEqualTo "") exitWith {
             GVAR(allowedBehavior) = [];
-            GVAR(allowedBehaviorSetting) = "[]";
+            GVAR(allowedBehaviorSetting) = '[]';
         };
 
         GVAR(allowedBehavior) = (parseSimpleArray _this) apply {toUpperANSI _x};

@@ -31,7 +31,7 @@
     private _currentThrowable = (currentThrowable _unit) param [0, ""];
 
     // Remove the selected grenade if it's in the list, otherwise find a compatible one; 'removeMagazine' makes UI buggy
-    if (_currentThrowable isNotEqualTo "" && {_currentThrowable in GVAR(allowedGrenades)}) then {
+    if (_currentThrowable != "" && {_currentThrowable in GVAR(allowedGrenades)}) then {
         _unit removeItem _currentThrowable;
     } else {
         private _grenadeIndex = GVAR(allowedGrenades) findAny (magazines _unit);
@@ -39,8 +39,8 @@
         // Make sure a compatible grenade is still available; If not, quit
         if (_grenadeIndex == -1) exitWith {
             [LLSTRING(grenadeNotFoundHint), false, 10, 2] call ace_common_fnc_displayText;
-    		breakOut "main";
-    	};
+            breakOut "main";
+        };
 
         _unit removeItem (GVAR(allowedGrenades) select _grenadeIndex);
     };
@@ -106,15 +106,23 @@
         // If vehicle is immobile or forceCrewDismount is true, set units to hold fire
         if (!GVAR(forceCrewDismount) && {canMove _target}) exitWith {};
 
-        // Make a separate group; This is to enforce no firing until dismounted
+        _crew = _crew select {alive _x};
+
+        // Make a separate group and get team colors; This is to enforce no firing until dismounted
         private _group = group _target;
         private _tempGroup = grpNull;
+        private _teamColors = _crew apply {assignedTeam _x};
 
         // If crew is part of a larger group, then create new group
-        if (count _crew != count units _target) then {
+        if (count _crew != count ((units _target) select {alive _x})) then {
             _tempGroup = createGroup [side _group, true];
             _crew joinSilent _tempGroup;
             _tempGroup setCombatMode "BLUE";
+
+            // Reassign colors
+            {
+                _x assignTeam (_teamColors select _forEachIndex);
+            } forEach _crew;
         };
 
         _crew doWatch objNull;
@@ -125,37 +133,38 @@
         {
             [{
                 params ["_args", "_handleID"];
-                _args params ["_unit", "_group", "_tempGroup"];
+                _args params ["_unit", "_group", "_tempGroup", "_teamColor"];
 
                 // If unit has dismounted, is dead or has been deleted
                 if (isNull objectParent _unit || {!alive _unit}) exitWith {
                     _handleID call CBA_fnc_removePerFrameHandler;
 
-                    if (!alive _unit) exitWith {};
+                    if (isNull _unit) exitWith {};
 
                     // If unit has dismounted, set combat mode and rejoin group if possible
                     [{
-                        params ["_unit", "_group", "_tempGroup"];
+                        params ["_unit", "_group", "_tempGroup", "_teamColor"];
 
                         // Set unit back to "normal"; This command does not work with setting units to "BLUE"
                         "YELLOW" remoteExecCall ["setUnitCombatMode", _unit];
 
-                        // Rejoin old group if it still exists
+                        // Rejoin old group if it still exists and reassign color
                         if (!isNull _group && {!isNull _tempGroup}) then {
                             [_unit] joinSilent _group;
+                            _unit assignTeam _teamColor;
                         };
 
                         // Stop unit from remounting again
                         [_unit] allowGetIn false;
-                    }, [_unit, _group, _tempGroup], 3] call CBA_fnc_waitAndExecute;
+                    }, _args, [3, 0] select (!alive _unit)] call CBA_fnc_waitAndExecute;
                 };
 
                 // Force crew to dismount if they are conscious
-                if (_unit getVariable ["ACE_isUnconscious", false] || {(lifeState _unit) isEqualTo "INCAPACITATED"}) exitWith {};
+                if (_unit getVariable ["ACE_isUnconscious", false] || {(lifeState _unit) == "INCAPACITATED"}) exitWith {};
 
                 // Eject unit from vehicle
                 moveOut _unit;
-            }, 0.5, [_x, _group, _tempGroup]] call CBA_fnc_addPerFrameHandler;
+            }, 0.5, [_x, _group, _tempGroup, _teamColors select _forEachIndex]] call CBA_fnc_addPerFrameHandler;
         } forEach _crew;
     }, _this, GVAR(delayExplosion)] call CBA_fnc_waitAndExecute;
 }] call CBA_fnc_addEventHandler;
