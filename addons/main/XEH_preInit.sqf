@@ -7,12 +7,37 @@ PREP_RECOMPILE_START;
 PREP_RECOMPILE_END;
 
 GVAR(actionACE) = [QGVAR(dropGrenade), LLSTRING(interactionName), "", {
-    [_player, _target] call FUNC(dropGrenade);
+    [_target, _player] call FUNC(dropGrenade);
 }, {
-    [_player, _target] call FUNC(dropCondition);
+    [_target, _player] call FUNC(dropCondition);
 }] call ace_interact_menu_fnc_createAction;
 
 GVAR(whitelistVehiclesInheritance) = [];
+
+// Events
+[QGVAR(grenadeDropped), LINKFUNC(grenadeDropped)] call CBA_fnc_addEventHandler;
+[QGVAR(grenadeEffect), LINKFUNC(grenadeEffect)] call CBA_fnc_addEventHandler;
+[QGVAR(medicalDamage), LINKFUNC(medicalDamage)] call CBA_fnc_addEventHandler;
+[QGVAR(vehicleDamage), LINKFUNC(vehicleDamage)] call CBA_fnc_addEventHandler;
+
+[QGVAR(playSound), {
+    params ["_sound", "_object", ["_volume", [1, 1]], ["_distance", 0]];
+    _volume params [["_volumeUI", 1], ["_volume3D", 1]];
+
+    // Bug in first person/gunner view where sound is greatly attenuated
+    if ((call CBA_fnc_currentUnit) in _object && {cameraView in ["INTERNAL", "GUNNER"]}) then {
+        playSoundUI [_sound, _volumeUI, 1, true];
+    } else {
+        playSound3D [_sound, objNull, false, getPosASL _object, _volume3D, 1, _distance, 0, true];
+    };
+}] call CBA_fnc_addEventHandler;
+
+// Let server handle crew dismounting
+if (isServer) then {
+    GVAR(monitorUnits) = [];
+
+    [QGVAR(dismountCrew), LINKFUNC(dismountCrew)] call CBA_fnc_addEventHandler;
+};
 
 #include "initSettings.sqf"
 

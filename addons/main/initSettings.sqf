@@ -79,6 +79,50 @@
 ] call CBA_fnc_addSetting;
 
 [
+    QGVAR(killCrewIfVehicleExplodes),
+    "CHECKBOX",
+    [LLSTRING(killCrewIfVehicleExplodes), LLSTRING(killCrewIfVehicleExplodes_ToolTip)],
+    [LLSTRING(nameMod), LLSTRING(damages)],
+    false,
+    0,
+    {
+        if (_this) then {
+            if (!isNil QGVAR(killedEhID)) exitWith {};
+
+            GVAR(killedEhID) = addMissionEventHandler ["EntityKilled", {
+                params ["_vehicle", "_killer", "_instigator", "_useEffects"];
+
+                // If run on server only, it doesn't always fire before the crew has dismounted
+                if (!local _vehicle) exitWith {};
+
+                // Check if 'vehicle' is an actual vehicle (look for a driver position)
+                if ((fullCrew [_vehicle, "driver", true]) isEqualTo []) exitWith {};
+
+                // Don't kill UAV crews
+                if (unitIsUAV _vehicle) exitWith {};
+
+                // Inspired by ACE - medical_engine - XEH_postInit.sqf
+                // Check if destruction effects are enabled
+                if (!_useEffects || {(getText (configOf _vehicle >> "destrType")) == ""}) exitWith {};
+
+                // Don't kill units in parachutes
+                if (_vehicle isKindOf "ParachuteBase") exitWith {};
+
+                // Damage units a lot and make sure they die
+                {
+                    [QGVAR(medicalDamage), [_x, _killer, _instigator, 10, "explosive", true], _x] call CBA_fnc_targetEvent;
+                } forEach (crew _vehicle);
+            }];
+        } else {
+            if (isNil QGVAR(killedEhID)) exitWith {};
+
+            removeMissionEventHandler ["EntityKilled", GVAR(killedEhID)];
+            GVAR(killedEhID) = nil;
+        };
+    }
+] call CBA_fnc_addSetting;
+
+[
     QGVAR(allowedGrenadesSetting),
     "EDITBOX",
     [LLSTRING(allowedGrenadesSetting), LLSTRING(allowedGrenadesSetting_ToolTip)],

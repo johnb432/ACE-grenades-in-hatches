@@ -1,3 +1,13 @@
+# Changelog for ACE Grenades in hatches 1.4.2023
+
+1.2.3.5
+- Added support for 2.12.
+- Added "Kill Crew if Vehicle explodes" setting: Kills the crew of an exploding vehicle.
+- Updated to use HEMTT 1.2.0.
+- Changed how crew are damaged.
+- Changed how sounds are played.
+- Minor improvements.
+
 # Changelog for ACE Grenades in hatches 8.12.2022
 
 1.2.3.4
@@ -40,7 +50,7 @@
 
 1.2.2.0
 - Added hemtt support.
-- Added "force crew dismount" setting: Crew dismounts if vehicle is immobile or setting added is enabled.
+- Added "Force crew dismount" setting: Crew dismounts if vehicle is immobile or setting added is enabled.
 
 # Changelog for ACE Grenades in hatches 17.4.2021
 
@@ -65,4 +75,4 @@
 # Changelog for ACE Grenades in hatches 9.3.2021
 
 1.0.0.0
-Inital release.
+- Inital release.

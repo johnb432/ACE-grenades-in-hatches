@@ -50,16 +50,16 @@
             <English>ACE Damage dealt to Crew</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtCrew_ToolTip">
-            <Original>Set to 0 for no damage.</Original>
-            <English>Set to 0 for no damage.</English>
+            <Original>The damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting. Set to 0 for no damage.</Original>
+            <English>The damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting. Set to 0 for no damage.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtCrewVanilla">
             <Original>Vanilla Damage dealt to Crew</Original>
             <English>Vanilla Damage dealt to Crew</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtCrewVanilla_ToolTip">
-            <Original>If ACE Medical is not loaded or the setting 'Damage Type' is set to 'Vanilla', this number will be chosen. Set to 0 for no damage.</Original>
-            <English>If ACE Medical is not loaded or the setting 'Damage Type' is set to 'Vanilla', this number will be chosen. Set to 0 for no damage.</English>
+            <Original>If ACE Medical is not loaded or the setting 'Damage Type' is set to 'Vanilla', this number will be chosen.\nThe damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting. Set to 0 for no damage.</Original>
+            <English>If ACE Medical is not loaded or the setting 'Damage Type' is set to 'Vanilla', this number will be chosen.\nThe damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting. Set to 0 for no damage.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_forceCrewDismount">
             <Original>Force Crew dismount</Original>
@@ -116,6 +116,14 @@
         <Key ID="STR_grenades_hatches_main_damageDealtTurretMax_ToolTip">
             <Original>Maximum damage that can be dealt to vehicle's turret with multiple interactions.</Original>
             <English>Maximum damage that can be dealt to vehicle's turret with multiple interactions.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodes">
+            <Original>Kill Crew if Vehicle explodes</Original>
+            <English>Kill Crew if Vehicle explodes</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodes_ToolTip">
+            <Original>If enabled, all vehicles that explode will kill all of the their crew.</Original>
+            <English>If enabled, all vehicles that explode will kill all of the their crew.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_allowedGrenadesSetting">
             <Original>Compatible Grenades</Original>
