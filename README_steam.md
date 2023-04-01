@@ -1,13 +1,12 @@
-[b]ACE Grenades in hatches - Tweaked[/b] is required on all clients.
-This addon allows the user to throw grenades into armored vehicles with hatches. The interaction point is the main interaction point of the vehicle.
+[b]ACE Grenades in hatches - Tweaked[/b] is required on all clients and allows the user to throw grenades into armored vehicles with hatches. The interaction point is the main interaction point of the vehicle. This is not an official ACE mod.
 
 The search for a compatible grenade will start by looking at the currently chosen grenade (the one you would throw if you would press the grenade key). If that one is in the list of compatible grenades, it will use that. Otherwise, it will go through a player's uniform first, then vest and finally backpack. On the way it will check starting from the first item on the list of compatible grenades to the end whether a compatible item is found. It will choose the first one found.
 
 [h2]CBA Settings[/h2]
 [list]
 [*] [b]Damage type applied to Crew:[/b] Adds the option to choose between vanilla and ACE damage.
-[*] [b]ACE Damage dealt to Crew:[/b] Allows the setting of the ACE damage applied to the crew of the target vehicle. The damage is applied randomly by both the function and the ACE damage function.
-[*] [b]Vanilla Damage dealt to Crew:[/b] Allows the setting of Vanilla damage applied to the crew of the target vehicle. This will be applied either if the setting above is set to 'Vanilla' or if ACE Medical isn't loaded.
+[*] [b]ACE Damage dealt to Crew:[/b] Allows the setting of the ACE damage applied to the crew of the target vehicle. The damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting.
+[*] [b]Vanilla Damage dealt to Crew:[/b] Allows the setting of Vanilla damage applied to the crew of the target vehicle. This will be applied either if the setting above is set to 'Vanilla' or if ACE Medical isn't loaded. The damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting.
 [*] [b]Force Crew dismount:[/b] Forces the crew to dismount, regardless of the vehicle damage. This option allows the vehicle to not have to be disabled in order for AI to dismount.
 [*] [b]Damage dealt to Vehicle's Hull:[/b] Sets the amount of damage the hull will take from one grenade.
 [*] [b]Damage dealt to Vehicle's Engine:[/b] Sets the amount of damage the engine will take from one grenade.
@@ -15,6 +14,7 @@ The search for a compatible grenade will start by looking at the currently chose
 [*] [b]Maximum Hull Damage allowed:[/b] Sets the maximum amount of damage to the hull that can be made by multiple interactions.
 [*] [b]Maximum Engine Damage allowed:[/b] Sets the maximum amount of damage to the engine that can be made by multiple interactions.
 [*] [b]Maximum Turret Damage allowed:[/b] Sets the maximum amount of damage to the turret that can be made by multiple interactions.
+[*] [b]Kill Crew if Vehicle explodes:[/b] If enabled, it will ensure that the crew of an exploding vehicle is dead.
 [*] [b]Allowed Grenades:[/b] Allows the user to define which grenades can be used for the action.
 [*] [b]Vehicle Blacklist (no Inheritance):[/b] Any vehicle in this list will not have the action enabled. It will only disable the vehicle itself and not its children (which means any classes that inherit from that class).
 [*] [b]Vehicle Blacklist (with Inheritance):[/b] Any vehicle and their children in this list will not have the action enabled. You can use this setting to more easily blacklist a family of vehicles.
@@ -65,5 +65,10 @@ If you want to just whitelist multiple vehicles e.g. [code]["B_APC_Wheeled_01_ca
 [/list]
 
 [h2]Credit[/h2]
+[list]
+[*] Launchman for making the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2398240266]original mod[/url] and allowing me to edit his version, many thanks!
+[*] Mod by johnb43
+[/list]
 
-Launchman for making the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2398240266]original mod[/url] and allowing me to edit his version, many thanks!
+[h2]License[/h2]
+See LICENSE.

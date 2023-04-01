@@ -2,17 +2,17 @@
 
 /*
  * Author: Larrow, johnb43
- * Spawns a grenade effect.
+ * Spawns a grenade's visual effects.
  * https://forums.bohemia.net/forums/topic/199056-need-to-make-a-small-explosion-on-trigger/?do=findComment&comment=3123988
  *
  * Arguments:
- * 0: Position where to make effect at <ARRAY>
+ * 0: Position AGL where to spawn visual effect at <ARRAY>
  *
  * Return Value:
  * None
  *
  * Example:
- * (getPos cursorObject) call grenades_hatches_main_fnc_grenadeEffect;
+ * (ASLToAGL getPosASL cursorObject) call grenades_hatches_main_fnc_grenadeEffect;
  *
  * Public: No
  */
