@@ -21,7 +21,7 @@
  * Public: No
  */
 
-params [["_unit", objNull, [objNull]], ["_killer", objNull, [objNull]], ["_instigator", objNull, [objNull]], "_damage", ["_woundType", "grenade", [""]], ["_guaranteeDeath", false, [false]]];
+params [["_unit", objNull, [objNull]], ["_killer", objNull, [objNull]], ["_instigator", objNull, [objNull]], "_damage", ["_woundType", "grenade", [""]], ["_guaranteeDeath", false, [true]]];
 
 if (isNull _unit) exitWith {};
 
