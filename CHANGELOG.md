@@ -1,3 +1,8 @@
+# Changelog for ACE Grenades in hatches 2.4.2023
+
+1.2.3.6
+- Minor code cleanup.
+
 # Changelog for ACE Grenades in hatches 1.4.2023
 
 1.2.3.5
