@@ -5,8 +5,8 @@
  * Plays progress bar for dropping a grenade in an armored vehicle.
  *
  * Arguments:
- * 0: Target vehicle <OBJECT>
- * 1: Unit dropping grenade <OBJECT>
+ * 0: Target vehicle <OBJECT> (default: objNull)
+ * 1: Unit dropping grenade <OBJECT> (default: objNull)
  *
  * Return Value:
  * None

@@ -5,7 +5,7 @@
  * Makes vehicle crew dismount when they are conscious.
  *
  * Arguments:
- * 0: Target <OBJECT>
+ * 0: Target <OBJECT> (default: objNull)
  *
  * Return Value:
  * None

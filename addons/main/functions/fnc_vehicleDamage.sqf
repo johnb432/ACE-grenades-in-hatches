@@ -5,8 +5,8 @@
  * Applies damage to vehicle.
  *
  * Arguments:
- * 0: Target <OBJECT>
- * 1: Instigator <OBJECT> (Optional)
+ * 0: Target <OBJECT> (default: objNull)
+ * 1: Instigator <OBJECT> (default: objNull)
  *
  * Return Value:
  * None
