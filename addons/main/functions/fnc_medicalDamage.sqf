@@ -1,16 +1,16 @@
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
 /*
  * Author: johnb43
  * Applies damage to a unit, saving who did the damage.
  *
  * Arguments:
- * 0: Target <OBJECT>
- * 1: Killer <OBJECT> (Optional)
- * 2: Instigator <OBJECT> (Optional)
- * 3: Damage <NUMBER> (Optional)
- * 4: Type of damage <STRING> (Optional)
- * 5: Guarantee death? <BOOLEAN> (Optional)
+ * 0: Target <OBJECT> (default: objNull)
+ * 1: Killer <OBJECT> (default: objNull)
+ * 2: Instigator <OBJECT> (default: objNull)
+ * 3: Damage <NUMBER> (default: nil)
+ * 4: Type of damage <STRING> (default: "grenade")
+ * 5: Guarantee death? <BOOLEAN> (default: false)
  *
  * Return Value:
  * None
@@ -55,7 +55,7 @@ if (GVAR(damageType) && {!isNil "ace_medical"}) then {
 
 // If guaranteed death is wished
 if (_guaranteeDeath && {alive _unit}) then {
-    // From 'ace_medical_status_fnc_setDead': Kill the unit without changing visual apperance
+    // From 'ace_medical_status_fnc_setDead': Kill the unit without changing visual appearance
     private _currentDamage = _unit getHitPointDamage "HitHead";
 
     _unit setHitPointDamage ["HitHead", 1, true, _killer, _instigator];

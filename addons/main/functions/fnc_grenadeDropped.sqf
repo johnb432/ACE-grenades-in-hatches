@@ -1,4 +1,4 @@
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
 /*
  * Author: johnb43
@@ -7,8 +7,8 @@
  *
  * Arguments:
  * 0: Args from progressbar <ARRAY>
- *  0: Target vehicle <OBJECT>
- *  1: Unit dropping grenade <OBJECT> (Optional)
+ *  0: Target vehicle <OBJECT> (default: objNull)
+ *  1: Unit dropping grenade <OBJECT> (default: objNull)
  *
  * Return Value:
  * None

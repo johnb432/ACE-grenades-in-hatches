@@ -1,12 +1,12 @@
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
 /*
  * Author: johnb43, Launchman
  * Plays progress bar for dropping a grenade in an armored vehicle.
  *
  * Arguments:
- * 0: Target vehicle <OBJECT>
- * 1: Unit dropping grenade <OBJECT>
+ * 0: Target vehicle <OBJECT> (default: objNull)
+ * 1: Unit dropping grenade <OBJECT> (default: objNull)
  *
  * Return Value:
  * None
@@ -25,5 +25,5 @@ if (isNull _target || {isNull _instigator}) exitWith {};
     (_this select 0) params ["_target", "_instigator"];
 
     // If the target has moved too far away from the player since the start of the interaction, stop the interaction
-    _instigator distance _target <= GVAR(distanceInteraction);
+    _instigator distance _target <= GVAR(distanceInteraction)
 }] call ace_common_fnc_progressBar;

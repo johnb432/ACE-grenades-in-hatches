@@ -1,11 +1,11 @@
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
 /*
  * Author: johnb43
  * Makes vehicle crew dismount when they are conscious.
  *
  * Arguments:
- * 0: Target <OBJECT>
+ * 0: Target <OBJECT> (default: objNull)
  *
  * Return Value:
  * None

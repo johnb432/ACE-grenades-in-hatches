@@ -1,7 +1,7 @@
 [
     QGVAR(damageType),
     "LIST",
-    [LLSTRING(damageType), LLSTRING(damageType_ToolTip)],
+    [LLSTRING(damageType), LLSTRING(damageTypeDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [[true, false], ["ACE", "Vanilla"], 0]
 ] call CBA_fnc_addSetting;
@@ -9,7 +9,7 @@
 [
     QGVAR(damageDealtCrew),
     "SLIDER",
-    [LLSTRING(damageDealtCrew), LLSTRING(damageDealtCrew_ToolTip)],
+    [LLSTRING(damageDealtCrew), LLSTRING(damageDealtCrewDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 30, 5, 2]
 ] call CBA_fnc_addSetting;
@@ -17,7 +17,7 @@
 [
     QGVAR(damageDealtCrewVanilla),
     "SLIDER",
-    [LLSTRING(damageDealtCrewVanilla), LLSTRING(damageDealtCrewVanilla_ToolTip)],
+    [LLSTRING(damageDealtCrewVanilla), LLSTRING(damageDealtCrewVanillaDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 0.25, 2, true]
 ] call CBA_fnc_addSetting;
@@ -25,7 +25,7 @@
 [
     QGVAR(forceCrewDismount),
     "CHECKBOX",
-    [LLSTRING(forceCrewDismount), LLSTRING(forceCrewDismount_ToolTip)],
+    [LLSTRING(forceCrewDismount), LLSTRING(forceCrewDismountDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     false
 ] call CBA_fnc_addSetting;
@@ -33,7 +33,7 @@
 [
     QGVAR(damageDealtHull),
     "SLIDER",
-    [LLSTRING(damageDealtHull), LLSTRING(damageDealtHull_ToolTip)],
+    [LLSTRING(damageDealtHull), LLSTRING(damageDealtHullDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
@@ -41,7 +41,7 @@
 [
     QGVAR(damageDealtEngine),
     "SLIDER",
-    [LLSTRING(damageDealtEngine), LLSTRING(damageDealtEngine_ToolTip)],
+    [LLSTRING(damageDealtEngine), LLSTRING(damageDealtEngineDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
@@ -49,7 +49,7 @@
 [
     QGVAR(damageDealtTurret),
     "SLIDER",
-    [LLSTRING(damageDealtTurret), LLSTRING(damageDealtTurret_ToolTip)],
+    [LLSTRING(damageDealtTurret), LLSTRING(damageDealtTurretDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
@@ -57,7 +57,7 @@
 [
     QGVAR(damageDealtHullMax),
     "SLIDER",
-    [LLSTRING(damageDealtHullMax), LLSTRING(damageDealtHullMax_ToolTip)],
+    [LLSTRING(damageDealtHullMax), LLSTRING(damageDealtHullMaxDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 0.75, 2, true]
 ] call CBA_fnc_addSetting;
@@ -65,7 +65,7 @@
 [
     QGVAR(damageDealtEngineMax),
     "SLIDER",
-    [LLSTRING(damageDealtEngineMax), LLSTRING(damageDealtEngineMax_ToolTip)],
+    [LLSTRING(damageDealtEngineMax), LLSTRING(damageDealtEngineMaxDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
@@ -73,7 +73,7 @@
 [
     QGVAR(damageDealtTurretMax),
     "SLIDER",
-    [LLSTRING(damageDealtTurretMax), LLSTRING(damageDealtTurretMax_ToolTip)],
+    [LLSTRING(damageDealtTurretMax), LLSTRING(damageDealtTurretMaxDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     [0, 1, 1, 2, true]
 ] call CBA_fnc_addSetting;
@@ -81,7 +81,7 @@
 [
     QGVAR(killCrewIfVehicleExplodes),
     "CHECKBOX",
-    [LLSTRING(killCrewIfVehicleExplodes), LLSTRING(killCrewIfVehicleExplodes_ToolTip)],
+    [LLSTRING(killCrewIfVehicleExplodes), LLSTRING(killCrewIfVehicleExplodesDesc)],
     [LLSTRING(nameMod), LLSTRING(damages)],
     false,
     0,
@@ -125,7 +125,7 @@
 [
     QGVAR(allowedGrenadesSetting),
     "EDITBOX",
-    [LLSTRING(allowedGrenadesSetting), LLSTRING(allowedGrenadesSetting_ToolTip)],
+    [LLSTRING(allowedGrenadesSetting), LLSTRING(allowedGrenadesSettingDesc)],
     [LLSTRING(nameMod), LLSTRING(lists)],
     '["HandGrenade","MiniGrenade"]',
     0,
@@ -143,7 +143,7 @@
 [
     QGVAR(whitelistVehiclesSetting),
     "EDITBOX",
-    [LLSTRING(whitelistVehiclesSetting), LLSTRING(whitelistVehiclesSetting_ToolTip)],
+    [LLSTRING(whitelistVehiclesSetting), LLSTRING(whitelistVehiclesSettingDesc)],
     [LLSTRING(nameMod), LLSTRING(lists)],
     '[]',
     0,
@@ -161,7 +161,7 @@
 [
     QGVAR(whitelistVehiclesInheritanceSetting),
     "EDITBOX",
-    [LLSTRING(whitelistVehiclesInheritanceSetting), LLSTRING(whitelistVehiclesInheritanceSetting_ToolTip)],
+    [LLSTRING(whitelistVehiclesInheritanceSetting), LLSTRING(whitelistVehiclesInheritanceSettingDesc)],
     [LLSTRING(nameMod), LLSTRING(lists)],
     '["Tank","Wheeled_Apc_F"]',
     0,
@@ -201,7 +201,7 @@
 [
     QGVAR(blacklistVehiclesSetting),
     "EDITBOX",
-    [LLSTRING(blacklistVehiclesSetting), LLSTRING(blacklistVehiclesSetting_ToolTip)],
+    [LLSTRING(blacklistVehiclesSetting), LLSTRING(blacklistVehiclesSettingDesc)],
     [LLSTRING(nameMod), LLSTRING(lists)],
     '[]',
     0,
@@ -219,7 +219,7 @@
 [
     QGVAR(blacklistVehiclesInheritanceSetting),
     "EDITBOX",
-    [LLSTRING(blacklistVehiclesInheritanceSetting), LLSTRING(blacklistVehiclesInheritanceSetting_ToolTip)],
+    [LLSTRING(blacklistVehiclesInheritanceSetting), LLSTRING(blacklistVehiclesInheritanceSettingDesc)],
     [LLSTRING(nameMod), LLSTRING(lists)],
     '[]',
     0,
@@ -237,7 +237,7 @@
 [
     QGVAR(allowedBehaviorSetting),
     "EDITBOX",
-    [LLSTRING(allowedBehaviorSetting), LLSTRING(allowedBehaviorSetting_ToolTip)],
+    [LLSTRING(allowedBehaviorSetting), LLSTRING(allowedBehaviorSettingDesc)],
     [LLSTRING(nameMod), LLSTRING(lists)],
     '["CARELESS","SAFE","AWARE","COMBAT","STEALTH"]',
     0,
@@ -254,7 +254,7 @@
 [
     QGVAR(disablePlayerAmbush),
     "CHECKBOX",
-    [LLSTRING(disablePlayerAmbush), LLSTRING(disablePlayerAmbush_ToolTip)],
+    [LLSTRING(disablePlayerAmbush), LLSTRING(disablePlayerAmbushDesc)],
     [LLSTRING(nameMod), LLSTRING(player)],
     false
 ] call CBA_fnc_addSetting;
@@ -262,7 +262,7 @@
 [
     QGVAR(distanceInteraction),
     "SLIDER",
-    [LLSTRING(distanceInteraction), LLSTRING(distanceInteraction_ToolTip)],
+    [LLSTRING(distanceInteraction), LLSTRING(distanceInteractionDesc)],
     [LLSTRING(nameMod), LLSTRING(player)],
     [2, 100, 10, 1]
 ] call CBA_fnc_addSetting;
@@ -270,7 +270,7 @@
 [
     QGVAR(delayExplosion),
     "SLIDER",
-    [LLSTRING(delayExplosion), LLSTRING(delayExplosion_ToolTip)],
+    [LLSTRING(delayExplosion), LLSTRING(delayExplosionDesc)],
     [LLSTRING(nameMod), LLSTRING(timings)],
     [0, 20, 5, 1]
 ] call CBA_fnc_addSetting;
@@ -278,7 +278,7 @@
 [
     QGVAR(delayInteraction),
     "SLIDER",
-    [LLSTRING(delayInteraction), LLSTRING(delayInteraction_ToolTip)],
+    [LLSTRING(delayInteraction), LLSTRING(delayInteractionDesc)],
     [LLSTRING(nameMod), LLSTRING(timings)],
     [0.5, 10, 3, 1]
 ] call CBA_fnc_addSetting;
@@ -286,7 +286,7 @@
 [
     QGVAR(enableKnowledgeMultiplier),
     "CHECKBOX",
-    [LLSTRING(enableKnowledgeMultiplier), LLSTRING(enableKnowledgeMultiplier_ToolTip)],
+    [LLSTRING(enableKnowledgeMultiplier), LLSTRING(enableKnowledgeMultiplierDesc)],
     [LLSTRING(nameMod), LLSTRING(timings)],
     false
 ] call CBA_fnc_addSetting;
@@ -294,7 +294,7 @@
 [
     QGVAR(knowledgeMultiplier),
     "SLIDER",
-    [LLSTRING(knowledgeMultiplier), LLSTRING(knowledgeMultiplier_ToolTip)],
+    [LLSTRING(knowledgeMultiplier), LLSTRING(knowledgeMultiplierDesc)],
     [LLSTRING(nameMod), LLSTRING(timings)],
     [1, 30, 5, 2]
 ] call CBA_fnc_addSetting;

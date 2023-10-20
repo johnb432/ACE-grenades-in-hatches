@@ -2,9 +2,7 @@
 
 ADDON = false;
 
-PREP_RECOMPILE_START;
 #include "XEH_PREP.hpp"
-PREP_RECOMPILE_END;
 
 GVAR(actionACE) = [QGVAR(dropGrenade), LLSTRING(interactionName), "", {
     [_target, _player] call FUNC(dropGrenade);
@@ -39,6 +37,7 @@ if (isServer) then {
     [QGVAR(dismountCrew), LINKFUNC(dismountCrew)] call CBA_fnc_addEventHandler;
 };
 
+// CBA Settings
 #include "initSettings.sqf"
 
 ADDON = true;

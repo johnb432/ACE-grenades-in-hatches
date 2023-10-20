@@ -2,6 +2,8 @@
 
 The search for a compatible grenade will start by looking at the currently chosen grenade (the one you would throw if you would press the grenade key). If that one is in the list of compatible grenades, it will use that. Otherwise, it will go through a player's uniform first, then vest and finally backpack. On the way it will check starting from the first item on the list of compatible grenades to the end whether a compatible item is found. It will choose the first one found.
 
+The interaction only appears if there is living, hostile crew inside the vehicle.
+
 <h2>CBA Settings</h2>
 
 * **Damage type applied to Crew:** Adds the option to choose between vanilla and ACE damage.
