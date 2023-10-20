@@ -2,6 +2,8 @@
 
 The search for a compatible grenade will start by looking at the currently chosen grenade (the one you would throw if you would press the grenade key). If that one is in the list of compatible grenades, it will use that. Otherwise, it will go through a player's uniform first, then vest and finally backpack. On the way it will check starting from the first item on the list of compatible grenades to the end whether a compatible item is found. It will choose the first one found.
 
+The interaction only appears if there is living, hostile crew inside the vehicle.
+
 <h2>CBA Settings</h2>
 
 * **Damage type applied to Crew:** Adds the option to choose between vanilla and ACE damage.
@@ -53,6 +55,7 @@ If you want to just whitelist multiple vehicles e.g. `["B_APC_Wheeled_01_cannon_
 * SOG: `["vn_chicom_grenade_mag","vn_f1_grenade_mag","vn_m61_grenade_mag","vn_m67_grenade_mag","vn_rg42_grenade_mag","vn_rgd33_grenade_mag","vn_rgd5_grenade_mag","vn_rkg3_grenade_mag","vn_t67_grenade_mag","vn_v40_grenade_mag","vn_satchelcharge_02_throw_mag"]`
 * Global Mobilization: `["gm_handgrenade_conc_dm51","gm_handgrenade_conc_dm51a1","gm_handgrenade_frag_dm51","gm_handgrenade_frag_dm51a1","gm_handgrenade_frag_rgd5"]`
 * CSLA: `["CSLA_F1","US85_M67","CSLA_RG4o","CSLA_RG4u","CSLA_URG86u","CSLA_URG86o"]`
+* SPE: `["SPE_Shg24x7", "SPE_Shg24", "SPE_M39", "SPE_US_Mk_3", "SPE_Shg24_Frag", "SPE_US_Mk_2", "SPE_US_Mk_2_Yellow"]`
 
 <h2>Links</h2>
 
