@@ -1,3 +1,8 @@
+# Changelog for ACE Grenades in hatches 3.3.2024
+
+1.2.5.0
+- Added "Autodetect Compatible Grenades" settings: Finds explosives grenades automatically and uses that list instead of the "Compatible Grenades" setting.
+
 # Changelog for ACE Grenades in hatches 20.10.2023
 
 1.2.4.0
