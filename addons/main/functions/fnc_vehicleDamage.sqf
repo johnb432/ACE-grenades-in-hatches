@@ -1,12 +1,11 @@
 #include "..\script_component.hpp"
-
 /*
  * Author: johnb43
  * Applies damage to vehicle.
  *
  * Arguments:
- * 0: Target <OBJECT> (default: objNull)
- * 1: Instigator <OBJECT> (default: objNull)
+ * 0: Target <OBJECT>
+ * 1: Instigator <OBJECT>
  *
  * Return Value:
  * None
@@ -17,14 +16,7 @@
  * Public: No
  */
 
-params [["_target", objNull, [objNull]], ["_instigator", objNull, [objNull]]];
-
-if (isNull _target) exitWith {};
-
-// Target vehicle needs to be local
-if (!local _target) exitWith {
-    [QGVAR(vehicleDamage), _this, _target] call CBA_fnc_targetEvent;
-};
+params ["_target", "_instigator"];
 
 // Add grenade explosion effect; Must be done on each client
 [QGVAR(playSound), [format ["A3\Sounds_F\arsenal\explosives\grenades\Explosion_HE_grenade_0%1.wss", floor (random 4) + 1], _target]] call CBA_fnc_globalEvent;

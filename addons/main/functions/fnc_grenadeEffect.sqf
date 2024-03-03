@@ -1,5 +1,4 @@
 #include "..\script_component.hpp"
-
 /*
  * Author: Larrow, johnb43
  * Spawns a grenade's visual effects.

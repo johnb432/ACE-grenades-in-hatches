@@ -1,4 +1,4 @@
-**ACE Grenades in hatches - Tweaked** is required on all clients and allows the user to throw grenades into armored vehicles with hatches. The interaction point is the main interaction point of the vehicle. This is not an official ACE mod.
+**ACE Grenades in hatches - Tweaked** is required on all clients and allows the user to throw grenades into armoured vehicles with hatches. The interaction point is the main interaction point of the vehicle. This is not an official ACE mod.
 
 The search for a compatible grenade will start by looking at the currently chosen grenade (the one you would throw if you would press the grenade key). If that one is in the list of compatible grenades, it will use that. Otherwise, it will go through a player's uniform first, then vest and finally backpack. On the way it will check starting from the first item on the list of compatible grenades to the end whether a compatible item is found. It will choose the first one found.
 
@@ -17,7 +17,8 @@ The interaction only appears if there is living, hostile crew inside the vehicle
 * **Maximum Engine Damage allowed:** Sets the maximum amount of damage to the engine that can be made by multiple interactions.
 * **Maximum Turret Damage allowed:** Sets the maximum amount of damage to the turret that can be made by multiple interactions.
 * **Kill Crew if Vehicle explodes:** If enabled, it will ensure that the crew of an exploding vehicle is dead.
-* **Allowed Grenades:** Allows the user to define which grenades can be used for the action. **This setting does not use inheritance.**
+* **Autodetect Compatible Grenades:** If enabled, it will automatically check for explosive grenades and use those for the compatible grenades list.
+* **Compatible Grenades:** Allows the user to define which grenades can be used for the action. **This setting does not use inheritance.**
 * **Vehicle Blacklist (no Inheritance):** Any vehicle in this list will not have the action enabled. It will only disable the vehicle itself and not its children (which means any classes that inherit from that class).
 * **Vehicle Blacklist (with Inheritance):** Any vehicle and their children in this list will not have the action enabled. You can use this setting to more easily blacklist a family of vehicles.
 * **Vehicle Whitelist (no Inheritance):** Any vehicle in this list will have the action enabled, if the setting below has added the interaction to that class (see whitelist examples). It will only enable the vehicle itself and not its children.
@@ -55,7 +56,7 @@ If you want to just whitelist multiple vehicles e.g. `["B_APC_Wheeled_01_cannon_
 * SOG: `["vn_chicom_grenade_mag","vn_f1_grenade_mag","vn_m61_grenade_mag","vn_m67_grenade_mag","vn_rg42_grenade_mag","vn_rgd33_grenade_mag","vn_rgd5_grenade_mag","vn_rkg3_grenade_mag","vn_t67_grenade_mag","vn_v40_grenade_mag","vn_satchelcharge_02_throw_mag"]`
 * Global Mobilization: `["gm_handgrenade_conc_dm51","gm_handgrenade_conc_dm51a1","gm_handgrenade_frag_dm51","gm_handgrenade_frag_dm51a1","gm_handgrenade_frag_rgd5"]`
 * CSLA: `["CSLA_F1","US85_M67","CSLA_RG4o","CSLA_RG4u","CSLA_URG86u","CSLA_URG86o"]`
-* SPE: `["SPE_Shg24x7", "SPE_Shg24", "SPE_M39", "SPE_US_Mk_3", "SPE_Shg24_Frag", "SPE_US_Mk_2", "SPE_US_Mk_2_Yellow"]`
+* SPE: `["SPE_Shg24x7","SPE_Shg24","SPE_M39","SPE_US_Mk_3","SPE_Shg24_Frag","SPE_US_Mk_2","SPE_US_Mk_2_Yellow"]`
 
 <h2>Links</h2>
 
