@@ -1,11 +1,10 @@
 #include "..\script_component.hpp"
-
 /*
  * Author: johnb43
  * Makes vehicle crew dismount when they are conscious.
  *
  * Arguments:
- * 0: Target <OBJECT> (default: objNull)
+ * 0: Target <OBJECT>
  *
  * Return Value:
  * None
@@ -16,7 +15,7 @@
  * Public: No
  */
 
-params [["_target", objNull, [objNull]]];
+params ["_target"];
 
 if (isNull _target) exitWith {};
 
@@ -33,13 +32,13 @@ private _cfgWeapons = configFile >> "CfgWeapons";
     _x doWatch objNull;
 
     // If unit is conscious, force them to dismount
-    if (!(_x getVariable ["ACE_isUnconscious", false]) && {(lifeState _x) != "INCAPACITATED"}) then {
+    if ((lifeState _x) in ["HEALTHY", "INJURED"]) then {
         // If unit is player or has access to weapons, force them to dismount immediately
         if (isPlayer _x || {((_target weaponsTurret (_target unitTurret _x)) select {!(_x isKindOf ["CarHorn", _cfgWeapons]) && {!(_x isKindOf ["SmokeLauncher", _cfgWeapons])} && {!(_x isKindOf ["Laserdesignator_vehicle", _cfgWeapons])}}) isNotEqualTo []}) then {
             moveOut _x;
         };
 
-        _x remoteExecCall ["unassignVehicle", _x];
+        [QGVAR(unassignVehicle), _x, _x] call CBA_fnc_targetEvent;
 
         continue;
     };
@@ -62,16 +61,16 @@ private _cfgWeapons = configFile >> "CfgWeapons";
 
         // Set combat mode and behaviour for group
         if (combatMode _group != "RED") then {
-            [_group, "RED"] remoteExecCall ["setCombatMode", _group];
+            [QGVAR(setCombatMode), [_group, "RED"], _group] call CBA_fnc_targetEvent;
         };
 
         if (combatBehaviour _group != "COMBAT") then {
-            [_group, "COMBAT"] remoteExecCall ["setCombatBehaviour", _group];
+            [QGVAR(setCombatBehaviour), [_group, "COMBAT"], _group] call CBA_fnc_targetEvent;
         };
 
         // Set combat mode and behaviour for unit
-        [_unit, "RED"] remoteExecCall ["setUnitCombatMode", _unit];
-        [_unit, "COMBAT"] remoteExecCall ["setCombatBehaviour", _unit];
+        [QGVAR(setUnitCombatMode), [_unit, "RED"], _unit] call CBA_fnc_targetEvent;
+        [QGVAR(setCombatBehaviour), [_unit, "COMBAT"], _unit] call CBA_fnc_targetEvent;
 
         // Stop unit from remounting again
         [_unit] allowGetIn false;
@@ -107,7 +106,7 @@ GVAR(monitorUnitsPFH) = [{
 
     // Force units to dismount if they are conscious
     {
-        if ((lifeState _x) != "INCAPACITATED") then {
+        if ((lifeState _x) in ["HEALTHY", "INJURED"]) then {
             moveOut _x;
         };
     } forEach GVAR(monitorUnits);

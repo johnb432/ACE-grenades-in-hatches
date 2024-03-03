@@ -123,6 +123,32 @@
 ] call CBA_fnc_addSetting;
 
 [
+    QGVAR(autodetectGrenadesSetting),
+    "CHECKBOX",
+    [LLSTRING(autodetectGrenadesSetting), LLSTRING(autodetectGrenadesSettingDesc)],
+    [LLSTRING(nameMod), LLSTRING(lists)],
+    true,
+    0,
+    {
+        GVAR(allowedGrenades) = if (_this) then {
+            keys (uiNamespace getVariable QGVAR(grenadesFrag))
+        } else {
+            private _string = trim GVAR(allowedGrenadesSetting);
+
+            // Check if it's a parsable array
+            if !(_string regexMatch "\[[^\]]*(\])") exitWith {
+                [format [LLSTRING(failedParsing), QGVAR(allowedGrenadesSetting)], 4] call ace_common_fnc_displayTextStructured;
+
+            	[]
+            };
+
+            // Make sure to remove invalid entries
+            ((parseSimpleArray _string) apply {configName (_x call CBA_fnc_getItemConfig)}) - [""]
+        };
+    }
+] call CBA_fnc_addSetting;
+
+[
     QGVAR(allowedGrenadesSetting),
     "EDITBOX",
     [LLSTRING(allowedGrenadesSetting), LLSTRING(allowedGrenadesSettingDesc)],
@@ -130,13 +156,19 @@
     '["HandGrenade","MiniGrenade"]',
     0,
     {
-        if (_this isEqualTo "") exitWith {
-            GVAR(allowedGrenades) = [];
-            GVAR(allowedGrenadesSetting) = '[]';
+        if (GVAR(autodetectGrenadesSetting)) exitWith {};
+
+        private _string = trim _this;
+
+        // Check if it's a parsable array
+        if !(_string regexMatch "\[[^\]]*(\])") exitWith {
+            [format [LLSTRING(failedParsing), QGVAR(allowedGrenadesSetting)], 4] call ace_common_fnc_displayTextStructured;
+
+        	GVAR(allowedGrenades) = [];
         };
 
         // Make sure to remove invalid entries
-        GVAR(allowedGrenades) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getItemConfig)}) - [""];
+        GVAR(allowedGrenades) = ((parseSimpleArray _string) apply {configName (_x call CBA_fnc_getItemConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -148,13 +180,17 @@
     '[]',
     0,
     {
-        if (_this isEqualTo "") exitWith {
-            GVAR(whitelistVehicles) = [];
-            GVAR(whitelistVehiclesSetting) = '[]';
+        private _string = trim _this;
+
+        // Check if it's a parsable array
+        if !(_string regexMatch "\[[^\]]*(\])") exitWith {
+            [format [LLSTRING(failedParsing), QGVAR(whitelistVehiclesSetting)], 4] call ace_common_fnc_displayTextStructured;
+
+        	GVAR(whitelistVehicles) = [];
         };
 
         // Make sure to remove invalid entries
-        GVAR(whitelistVehicles) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
+        GVAR(whitelistVehicles) = ((parseSimpleArray _string) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -166,12 +202,15 @@
     '["Tank","Wheeled_Apc_F"]',
     0,
     {
+        private _string = trim _this;
+
         // Make config case and remove invalid entries
-        private _setting = ((if (_this isEqualTo "") then {
-            GVAR(whitelistVehiclesInheritanceSetting) = '[]';
+        private _setting = ((if !(_string regexMatch "\[[^\]]*(\])") then {
+            [format [LLSTRING(failedParsing), QGVAR(whitelistVehiclesInheritanceSetting)], 4] call ace_common_fnc_displayTextStructured;
+
             []
         } else {
-            parseSimpleArray _this
+            parseSimpleArray _string
         }) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
 
         // Add classes
@@ -206,13 +245,17 @@
     '[]',
     0,
     {
-        if (_this isEqualTo "") exitWith {
-            GVAR(blacklistVehicles) = [];
-            GVAR(blacklistVehiclesSetting) = '[]';
+        private _string = trim _this;
+
+        // Check if it's a parsable array
+        if !(_string regexMatch "\[[^\]]*(\])") exitWith {
+            [format [LLSTRING(failedParsing), QGVAR(blacklistVehiclesSetting)], 4] call ace_common_fnc_displayTextStructured;
+
+        	GVAR(blacklistVehicles) = [];
         };
 
         // Make sure to remove invalid entries
-        GVAR(blacklistVehicles) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
+        GVAR(blacklistVehicles) = ((parseSimpleArray _string) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -224,13 +267,17 @@
     '[]',
     0,
     {
-        if (_this isEqualTo "") exitWith {
-            GVAR(blacklistVehiclesInheritance) = [];
-            GVAR(blacklistVehiclesInheritanceSetting) = '[]';
+        private _string = trim _this;
+
+        // Check if it's a parsable array
+        if !(_string regexMatch "\[[^\]]*(\])") exitWith {
+            [format [LLSTRING(failedParsing), QGVAR(blacklistVehiclesInheritanceSetting)], 4] call ace_common_fnc_displayTextStructured;
+
+        	GVAR(blacklistVehiclesInheritance) = [];
         };
 
         // Make sure to remove invalid entries
-        GVAR(blacklistVehiclesInheritance) = ((parseSimpleArray _this) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
+        GVAR(blacklistVehiclesInheritance) = ((parseSimpleArray _string) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
     }
 ] call CBA_fnc_addSetting;
 
@@ -242,12 +289,16 @@
     '["CARELESS","SAFE","AWARE","COMBAT","STEALTH"]',
     0,
     {
-        if (_this isEqualTo "") exitWith {
-            GVAR(allowedBehavior) = [];
-            GVAR(allowedBehaviorSetting) = '[]';
+        private _string = trim _this;
+
+        // Check if it's a parsable array
+        if !(_string regexMatch "\[[^\]]*(\])") exitWith {
+            [format [LLSTRING(failedParsing), QGVAR(allowedBehaviorSetting)], 4] call ace_common_fnc_displayTextStructured;
+
+        	GVAR(allowedBehavior) = [];
         };
 
-        GVAR(allowedBehavior) = (parseSimpleArray _this) apply {toUpperANSI _x};
+        GVAR(allowedBehavior) = (parseSimpleArray _string) apply {toUpperANSI _x};
     }
 ] call CBA_fnc_addSetting;
 

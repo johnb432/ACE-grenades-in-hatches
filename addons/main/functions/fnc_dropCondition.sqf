@@ -1,5 +1,4 @@
 #include "..\script_component.hpp"
-
 /*
  * Author: johnb43, Launchman
  * Checks if the interaction can be used.
@@ -23,7 +22,7 @@ params ["_target", "_instigator"];
 if !((behaviour _target) in GVAR(allowedBehavior)) exitWith {false};
 
 // See if player has required grenades and whether sides are not the same
-if !(([side _instigator, side _target] call BIS_fnc_sideIsEnemy) && {(GVAR(allowedGrenades) findAny (magazines _instigator)) != -1}) exitWith {false};
+if !(([side group _instigator, side group _target] call BIS_fnc_sideIsEnemy) && {(GVAR(allowedGrenades) findAny (magazines _instigator)) != -1}) exitWith {false};
 
 // Checks for player ambush setting
 if (GVAR(disablePlayerAmbush) && {((crew _target) findIf {isPlayer _x}) != -1}) exitWith {false};

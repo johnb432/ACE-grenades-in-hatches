@@ -7,11 +7,7 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {
-            "A3_Data_F_AoW_Loadorder",
-            "ace_common",
-            "ace_interact_menu",
-            "cba_main",
-            "cba_xeh"
+            "ace_interact_menu"
         };
         author = "johnb43, Launchman";
         authors[] = {"johnb43", "Launchman"};

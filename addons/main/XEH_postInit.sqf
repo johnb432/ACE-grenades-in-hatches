@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 // Let server handle crew dismounting
-if !(isServer && {!isNil "ace_medical"}) exitWith {};
+if (!isServer || {isNil "ace_medical"}) exitWith {};
 
 // Add event to listen for consciousness change
 ["ace_unconscious", {
@@ -21,5 +21,5 @@ if !(isServer && {!isNil "ace_medical"}) exitWith {};
         moveOut _unit;
     };
 
-    _unit remoteExecCall ["unassignVehicle", _unit];
+    [QGVAR(unassignVehicle), _unit, _unit] call CBA_fnc_targetEvent;
 }] call CBA_fnc_addEventHandler;

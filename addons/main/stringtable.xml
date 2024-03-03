@@ -8,7 +8,7 @@
             <English>Drop Grenade in hatch</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_interactionNameProgress">
-            <English>Dropping Grenade in hatch</English>
+            <English>Dropping Grenade in hatch...</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_grenadeNotFoundHint">
             <English>A compatible grenade couldn't be found!</English>
@@ -27,6 +27,9 @@
         </Key>
         <Key ID="STR_grenades_hatches_main_timings">
             <English>Timings</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_failedParsing">
+            <English>Failed to parse '%1' - there is an error in your setting.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageType">
             <English>Damage type applied to Crew</English>
@@ -93,6 +96,12 @@
         </Key>
         <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodesDesc">
             <English>If enabled, all vehicles that explode will kill all of the their crew.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_autodetectGrenadesSetting">
+            <English>Autodetect Compatible Grenades</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_autodetectGrenadesSettingDesc">
+            <English>If enabled, the mod will detect any offensive grenades and check for those when trying to use the interaction.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_allowedGrenadesSetting">
             <English>Compatible Grenades</English>

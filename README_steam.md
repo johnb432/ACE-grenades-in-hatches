@@ -1,4 +1,4 @@
-[b]ACE Grenades in hatches - Tweaked[/b] is required on all clients and allows the user to throw grenades into armored vehicles with hatches. The interaction point is the main interaction point of the vehicle. This is not an official ACE mod.
+[b]ACE Grenades in hatches - Tweaked[/b] is required on all clients and allows the user to throw grenades into armoured vehicles with hatches. The interaction point is the main interaction point of the vehicle. This is not an official ACE mod.
 
 The search for a compatible grenade will start by looking at the currently chosen grenade (the one you would throw if you would press the grenade key). If that one is in the list of compatible grenades, it will use that. Otherwise, it will go through a player's uniform first, then vest and finally backpack. On the way it will check starting from the first item on the list of compatible grenades to the end whether a compatible item is found. It will choose the first one found.
 

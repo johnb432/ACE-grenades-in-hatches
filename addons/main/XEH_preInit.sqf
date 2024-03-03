@@ -18,6 +18,30 @@ GVAR(whitelistVehiclesInheritance) = [];
 [QGVAR(medicalDamage), LINKFUNC(medicalDamage)] call CBA_fnc_addEventHandler;
 [QGVAR(vehicleDamage), LINKFUNC(vehicleDamage)] call CBA_fnc_addEventHandler;
 
+[QGVAR(unassignVehicle), {
+    params ["_unit"];
+
+    unassignVehicle _unit;
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(setCombatMode), {
+    params ["_unit", "_mode"];
+
+    _unit setCombatMode _mode;
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(setCombatBehaviour), {
+    params ["_unit", "_mode"];
+
+    _unit setCombatMode _mode;
+}] call CBA_fnc_addEventHandler;
+
+[QGVAR(setUnitCombatMode), {
+    params ["_unit", "_mode"];
+
+    _unit setUnitCombatMode _mode;
+}] call CBA_fnc_addEventHandler;
+
 [QGVAR(playSound), {
     params ["_sound", "_object", ["_volume", [1, 1]], ["_distance", 0]];
     _volume params [["_volumeUI", 1], ["_volume3D", 1]];
@@ -38,6 +62,6 @@ if (isServer) then {
 };
 
 // CBA Settings
-#include "initSettings.sqf"
+#include "initSettings.inc.sqf"
 
 ADDON = true;
