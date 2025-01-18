@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 // Let server handle crew dismounting
-if (!isServer || {isNil "ace_medical"}) exitWith {};
+if (!isServer || {!(missionNamespace getVariable ["ace_medical_enabled", false])}) exitWith {};
 
 // Add event to listen for consciousness change
 ["ace_unconscious", {

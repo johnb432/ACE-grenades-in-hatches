@@ -94,8 +94,8 @@ private _cfgWeapons = configFile >> "CfgWeapons";
     }];
 } forEach ((crew _target) select {alive _x});
 
-// Don't look for consciousness change if ace medical is loaded
-if (!isNil "ace_medical" || {!isNil QGVAR(monitorUnitsPFH)}) exitWith {};
+// Don't look for consciousness change if ace medical is enabled
+if (missionNamespace getVariable ["ace_medical_enabled", false] || {!isNil QGVAR(monitorUnitsPFH)}) exitWith {};
 
 GVAR(monitorUnitsPFH) = [{
     // If there are no more units to monitor, stop

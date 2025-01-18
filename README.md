@@ -17,7 +17,7 @@ The interaction only appears if there is living, hostile crew inside the vehicle
 * **Maximum Engine Damage allowed:** Sets the maximum amount of damage to the engine that can be made by multiple interactions.
 * **Maximum Turret Damage allowed:** Sets the maximum amount of damage to the turret that can be made by multiple interactions.
 * **Kill Crew if Vehicle explodes:** If enabled, it will ensure that the crew of an exploding vehicle is dead.
-* **Autodetect Compatible Grenades:** If enabled, it will automatically check for explosive grenades and use those for the compatible grenades list.
+* **Autodetect Compatible Grenades:** If enabled, it will automatically check for explosive grenades and use those for the compatible grenades list. If this is enabled, it will override the **Compatible Grenades** setting.
 * **Compatible Grenades:** Allows the user to define which grenades can be used for the action. **This setting does not use inheritance.**
 * **Vehicle Blacklist (no Inheritance):** Any vehicle in this list will not have the action enabled. It will only disable the vehicle itself and not its children (which means any classes that inherit from that class).
 * **Vehicle Blacklist (with Inheritance):** Any vehicle and their children in this list will not have the action enabled. You can use this setting to more easily blacklist a family of vehicles.
@@ -42,6 +42,8 @@ If you want to just whitelist multiple vehicles e.g. `["B_APC_Wheeled_01_cannon_
 * Don't change "with Inheritance"
 
 <h2>Grenade List Examples</h2>
+
+**Compatible Grenades** setting value examples:
 
 * Vanilla: `["HandGrenade","MiniGrenade"]`
 * RHS: `["rhs_mag_rgd5","rhs_mag_rgn","rhs_mag_rgo","rhs_grenade_m1939e_mag","rhs_grenade_m1939l_mag","rhs_grenade_m1939e_f_mag","rhs_grenade_m1939l_f_mag","rhs_mag_f1","rhs_grenade_mkii_mag","rhsgref_mag_rkg3em","rhs_charge_sb3kg_mag","rhs_grenade_sthgr24_mag","rhs_grenade_sthgr24_heerfrag_mag","rhs_grenade_sthgr24_SSfrag_mag","rhs_grenade_sthgr24_x7bundle_mag","rhs_grenade_sthgr43_mag","rhs_grenade_sthgr43_heerfrag_mag","rhs_grenade_sthgr43_SSfrag_mag","rhs_charge_tnt_x2_mag","rhs_grenade_khattabka_vog17_mag","rhs_grenade_khattabka_vog25_mag","rhssaf_mag_br_m75","rhssaf_mag_br_m84","rhssaf_mag_brk_m79","rhs_mag_m67"]`

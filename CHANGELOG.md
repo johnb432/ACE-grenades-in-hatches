@@ -1,3 +1,8 @@
+# Changelog for ACE Grenades in hatches 18.1.2025
+
+1.2.6.0
+- Minor optimisation and bug fixes.
+
 # Changelog for ACE Grenades in hatches 3.3.2024
 
 1.2.5.0
