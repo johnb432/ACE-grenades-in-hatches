@@ -25,8 +25,8 @@ params ["_unit", "_source", "_instigator", "_damage", ["_woundType", "grenade"],
 // Check if unit is invulnerable
 if !(isDamageAllowed _unit && {_unit getVariable ["ace_medical_allowDamage", true]}) exitWith {};
 
-// If ACE is loaded on the client, use that to do damage
-if (GVAR(damageType) && {!isNil "ace_medical"}) then {
+// If ACE medical is enabled on the client, use that to do damage
+if (GVAR(damageType) && {missionNamespace getVariable ["ace_medical_enabled", false]}) then {
     if (isNil "_damage") then {
         _damage = GVAR(damageDealtCrew);
     };
@@ -48,10 +48,5 @@ if (GVAR(damageType) && {!isNil "ace_medical"}) then {
 
 // If guaranteed death is wished
 if (_guaranteeDeath && {alive _unit}) then {
-    // From 'ace_medical_status_fnc_setDead': Kill the unit without changing visual appearance
-    private _currentDamage = _unit getHitPointDamage "HitHead";
-
-    _unit setHitPointDamage ["HitHead", 1, true, _source, _instigator];
-
-    _unit setHitPointDamage ["HitHead", _currentDamage, true, _source, _instigator];
+    [_unit, "GrenadeInHatch", _source, _instigator] call ace_common_fnc_setDead;
 };

@@ -38,8 +38,8 @@ if !(_currentThrowable in GVAR(allowedGrenades)) then {
     _currentThrowable = GVAR(allowedGrenades) select _grenadeIndex;
 };
 
-// 'removeMagazine' makes UI buggy
-_instigator removeItem _currentThrowable;
+// Remove 1 ammo from magazine (could be multiple use grenade, like SOG one)
+[_instigator, _currentThrowable, -1] call ace_common_fnc_adjustMagazineAmmo;
 
 private _players = (crew _target) select {isPlayer _x};
 

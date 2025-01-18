@@ -110,10 +110,5 @@ _light setLightIntensity 10000;
 _light setLightAttenuation [0, 0, 0, 2.2, 500, 1000];
 
 // Delete objects after set amount of time
-[{
-    {
-        deleteVehicle _x;
-    } forEach _this;
-}, [_source1, _light], 0.3] call CBA_fnc_waitAndExecute;
-
+[{deleteVehicle _this}, [_source1, _light], 0.3] call CBA_fnc_waitAndExecute;
 [{deleteVehicle _this}, _source2, 5] call CBA_fnc_waitAndExecute;

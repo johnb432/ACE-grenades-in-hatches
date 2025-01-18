@@ -131,7 +131,15 @@
     0,
     {
         GVAR(allowedGrenades) = if (_this) then {
-            keys (uiNamespace getVariable QGVAR(grenadesFrag))
+            // Use ACE's cache if existent
+            if (isNil "ace_weaponselect_grenadesFrag") then {
+                private _cfgMagazines = configFile >> "CfgMagazines";
+                private _cfgAmmo = configFile >> "CfgAmmo";
+
+                ace_weaponselect_grenadesFrag = (compatibleMagazines "throw") select {getNumber (_cfgAmmo >> getText (_cfgMagazines >> _x >> "ammo") >> "explosive") != 0}
+            };
+
+            +ace_weaponselect_grenadesFrag
         } else {
             private _string = trim GVAR(allowedGrenadesSetting);
 
@@ -213,24 +221,14 @@
             parseSimpleArray _string
         }) apply {configName (_x call CBA_fnc_getObjectConfig)}) - [""];
 
-        // Add classes
+        // Add actions to added classes
         {
             [_x, 0, ["ACE_MainActions"], GVAR(actionACE), true] call ace_interact_menu_fnc_addActionToClass;
         } forEach (_setting - GVAR(whitelistVehiclesInheritance));
 
-        private _type = "";
-
-        // Remove classes
+        // Remove actions from removed classes
         {
-            _type = _x;
-
-            ace_interact_menu_inheritedActionsAll deleteAt (ace_interact_menu_inheritedActionsAll find [_type, 0, ["ACE_MainActions"], GVAR(actionACE)]);
-
-            {
-                if (_x isKindOf _type) then {
-                    [_x, 0, ["ACE_MainActions", QGVAR(dropGrenade)]] call ace_interact_menu_fnc_removeActionFromClass;
-                };
-            } forEach ace_interact_menu_inheritedClassesAll;
+            [_x, 0, ["ACE_MainActions"], GVAR(actionACE), true] call ace_interact_menu_fnc_removeActionFromClass;
         } forEach (GVAR(whitelistVehiclesInheritance) - _setting);
 
         GVAR(whitelistVehiclesInheritance) = _setting;

@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="grenades_hatches">
     <Package name="main">
-        <Key ID="STR_grenades_hatches_main_nameMod">
-            <English>ACE Grenades in hatches - Tweaked</English>
+        <Key ID="STR_grenades_hatches_main_allowedBehaviorSetting">
+            <English>Target Awareness</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_interactionName">
-            <English>Drop Grenade in hatch</English>
+        <Key ID="STR_grenades_hatches_main_allowedBehaviorSettingDesc">
+            <English>The array of allowed behavior types that the target crew must have in order to throw in a grenade. Default contains all behavior possibilities.\nFormat is an array of strings.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_interactionNameProgress">
-            <English>Dropping Grenade in hatch...</English>
+        <Key ID="STR_grenades_hatches_main_allowedGrenadesSetting">
+            <English>Compatible Grenades</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_grenadeNotFoundHint">
-            <English>A compatible grenade couldn't be found!</English>
+        <Key ID="STR_grenades_hatches_main_allowedGrenadesSettingDesc">
+            <English>The array of classnames of grenades that can be used.\nThis setting does not use inheritance.\nFormat is an array of strings.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_grenadeThrownInHatchHint">
-            <English>Someone threw a grenade into the hatch!!!</English>
+        <Key ID="STR_grenades_hatches_main_autodetectGrenadesSetting">
+            <English>Autodetect Compatible Grenades</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_damages">
-            <English>Damages</English>
+        <Key ID="STR_grenades_hatches_main_autodetectGrenadesSettingDesc">
+            <English>If enabled, the mod will detect any offensive grenades and check for those when trying to use the interaction.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_lists">
-            <English>Lists</English>
+        <Key ID="STR_grenades_hatches_main_blacklistVehiclesInheritanceSetting">
+            <English>Vehicle Blacklist (with Inheritance)</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_player">
-            <English>Player</English>
+        <Key ID="STR_grenades_hatches_main_blacklistVehiclesInheritanceSettingDesc">
+            <English>A blacklist for an object and all of it's children.\nFormat is an array of strings.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_timings">
-            <English>Timings</English>
+        <Key ID="STR_grenades_hatches_main_blacklistVehiclesSetting">
+            <English>Vehicle Blacklist (no Inheritance)</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_failedParsing">
-            <English>Failed to parse '%1' - there is an error in your setting.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_damageType">
-            <English>Damage type applied to Crew</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_damageTypeDesc">
-            <English>Applies either ACE or Vanilla damage to crew.\nIf ACE is not loaded, it will not apply ACE damage.</English>
+        <Key ID="STR_grenades_hatches_main_blacklistVehiclesSettingDesc">
+            <English>A blacklist for specific object types.\nFormat is an array of strings.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtCrew">
             <English>ACE Damage dealt to Crew</English>
@@ -49,28 +43,22 @@
         <Key ID="STR_grenades_hatches_main_damageDealtCrewVanillaDesc">
             <English>If ACE Medical is not loaded or the setting 'Damage Type' is set to 'Vanilla', this number will be chosen.\nThe damage is applied randomly. The maximum amount of damage applied to a unit is this setting, the minimum amount is half this setting. Set to 0 for no damage.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_forceCrewDismount">
-            <English>Force Crew dismount</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_forceCrewDismountDesc">
-            <English>Forces the crew to dismount, regardless of vehicle damage.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_damageDealtHull">
-            <English>Damage dealt to vehicle's Hull</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_damageDealtHullDesc">
-            <English>Damage dealt with one interaction.</English>
-        </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtEngine">
             <English>Damage dealt to vehicle's Engine</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtEngineDesc">
             <English>Damage dealt with one interaction.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_damageDealtTurret">
-            <English>Damage dealt to vehicle's Turret</English>
+        <Key ID="STR_grenades_hatches_main_damageDealtEngineMax">
+            <English>Maximum Engine Damage allowed</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_damageDealtTurretDesc">
+        <Key ID="STR_grenades_hatches_main_damageDealtEngineMaxDesc">
+            <English>Maximum damage that can be dealt to vehicle's engine with multiple interactions.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_damageDealtHull">
+            <English>Damage dealt to vehicle's Hull</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_damageDealtHullDesc">
             <English>Damage dealt with one interaction.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtHullMax">
@@ -79,11 +67,11 @@
         <Key ID="STR_grenades_hatches_main_damageDealtHullMaxDesc">
             <English>Maximum damage that can be dealt to vehicle's hull with multiple interactions.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_damageDealtEngineMax">
-            <English>Maximum Engine Damage allowed</English>
+        <Key ID="STR_grenades_hatches_main_damageDealtTurret">
+            <English>Damage dealt to vehicle's Turret</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_damageDealtEngineMaxDesc">
-            <English>Maximum damage that can be dealt to vehicle's engine with multiple interactions.</English>
+        <Key ID="STR_grenades_hatches_main_damageDealtTurretDesc">
+            <English>Damage dealt with one interaction.</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_damageDealtTurretMax">
             <English>Maximum Turret Damage allowed</English>
@@ -91,65 +79,14 @@
         <Key ID="STR_grenades_hatches_main_damageDealtTurretMaxDesc">
             <English>Maximum damage that can be dealt to vehicle's turret with multiple interactions.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodes">
-            <English>Kill Crew if Vehicle explodes</English>
+        <Key ID="STR_grenades_hatches_main_damageType">
+            <English>Damage type applied to Crew</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodesDesc">
-            <English>If enabled, all vehicles that explode will kill all of the their crew.</English>
+        <Key ID="STR_grenades_hatches_main_damageTypeDesc">
+            <English>Applies either ACE or Vanilla damage to crew.\nIf ACE is not loaded, it will not apply ACE damage.</English>
         </Key>
-        <Key ID="STR_grenades_hatches_main_autodetectGrenadesSetting">
-            <English>Autodetect Compatible Grenades</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_autodetectGrenadesSettingDesc">
-            <English>If enabled, the mod will detect any offensive grenades and check for those when trying to use the interaction.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_allowedGrenadesSetting">
-            <English>Compatible Grenades</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_allowedGrenadesSettingDesc">
-            <English>The array of classnames of grenades that can be used.\nThis setting does not use inheritance.\nFormat is an array of strings.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_blacklistVehiclesSetting">
-            <English>Vehicle Blacklist (no Inheritance)</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_blacklistVehiclesSettingDesc">
-            <English>A blacklist for specific object types.\nFormat is an array of strings.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_blacklistVehiclesInheritanceSetting">
-            <English>Vehicle Blacklist (with Inheritance)</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_blacklistVehiclesInheritanceSettingDesc">
-            <English>A blacklist for an object and all of it's children.\nFormat is an array of strings.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_whitelistVehiclesSetting">
-            <English>Vehicle Whitelist (no Inheritance)</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_whitelistVehiclesSettingDesc">
-            <English>A whitelist for specific object types. If this is empty, it will be ignored.\nFormat is an array of strings.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_whitelistVehiclesInheritanceSetting">
-            <English>Vehicle Whitelist (with Inheritance)</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_whitelistVehiclesInheritanceSettingDesc">
-            <English>A whitelist for an object and all of it's children. Use this to remove interaction from all object types.\nFormat is an array of strings.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_allowedBehaviorSetting">
-            <English>Target Awareness</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_allowedBehaviorSettingDesc">
-            <English>The array of allowed behavior types that the target crew must have in order to throw in a grenade. Default contains all behavior possibilities.\nFormat is an array of strings.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_disablePlayerAmbush">
-            <English>Disable Player controlled Targets to be attacked</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_disablePlayerAmbushDesc">
-            <English>If a player is part of the target's crew, then disable the usage of this interaction.</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_distanceInteraction">
-            <English>Interaction Range</English>
-        </Key>
-        <Key ID="STR_grenades_hatches_main_distanceInteractionDesc">
-            <English>Sets the maximum interaction range.</English>
+        <Key ID="STR_grenades_hatches_main_damages">
+            <English>Damages</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_delayExplosion">
             <English>Delay to Explosion</English>
@@ -163,17 +100,80 @@
         <Key ID="STR_grenades_hatches_main_delayInteractionDesc">
             <English>Sets the length of the interaction. It's the minimum if 'Enable Knowledge Multiplier' is enabled.</English>
         </Key>
+        <Key ID="STR_grenades_hatches_main_disablePlayerAmbush">
+            <English>Disable Player controlled Targets to be attacked</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_disablePlayerAmbushDesc">
+            <English>If a player is part of the target's crew, then disable the usage of this interaction.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_distanceInteraction">
+            <English>Interaction Range</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_distanceInteractionDesc">
+            <English>Sets the maximum interaction range.</English>
+        </Key>
         <Key ID="STR_grenades_hatches_main_enableKnowledgeMultiplier">
             <English>Enable Knowledge Multiplier</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_enableKnowledgeMultiplierDesc">
             <English>Enables the setting below.\nIf the target 'knowsAbout' a unit, it will take longer according to the the result of 'knowsAbout'.</English>
         </Key>
+        <Key ID="STR_grenades_hatches_main_failedParsing">
+            <English>Failed to parse '%1' - there is an error in your setting.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_forceCrewDismount">
+            <English>Force Crew dismount</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_forceCrewDismountDesc">
+            <English>Forces the crew to dismount, regardless of vehicle damage.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_grenadeNotFoundHint">
+            <English>A compatible grenade couldn't be found!</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_grenadeThrownInHatchHint">
+            <English>Someone threw a grenade into the hatch!!!</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_interactionName">
+            <English>Drop Grenade in hatch</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_interactionNameProgress">
+            <English>Dropping Grenade in hatch...</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodes">
+            <English>Kill Crew if Vehicle explodes</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_killCrewIfVehicleExplodesDesc">
+            <English>If enabled, all vehicles that explode will kill all of the their crew.</English>
+        </Key>
         <Key ID="STR_grenades_hatches_main_knowledgeMultiplier">
             <English>Knowledge Multiplier</English>
         </Key>
         <Key ID="STR_grenades_hatches_main_knowledgeMultiplierDesc">
-            <English>This will set the upper limit of the linear conversion.\nThe conversion is: [0, 4] -> [1, this setting].</English>
+            <English>This will set the upper limit of the linear conversion.\nThe conversion is: [0, 4] -&gt; [1, this setting].</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_lists">
+            <English>Lists</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_nameMod">
+            <English>ACE Grenades in hatches - Tweaked</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_player">
+            <English>Player</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_timings">
+            <English>Timings</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_whitelistVehiclesInheritanceSetting">
+            <English>Vehicle Whitelist (with Inheritance)</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_whitelistVehiclesInheritanceSettingDesc">
+            <English>A whitelist for an object and all of it's children. Use this to remove interaction from all object types.\nFormat is an array of strings.</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_whitelistVehiclesSetting">
+            <English>Vehicle Whitelist (no Inheritance)</English>
+        </Key>
+        <Key ID="STR_grenades_hatches_main_whitelistVehiclesSettingDesc">
+            <English>A whitelist for specific object types. If this is empty, it will be ignored.\nFormat is an array of strings.</English>
         </Key>
     </Package>
 </Project>
