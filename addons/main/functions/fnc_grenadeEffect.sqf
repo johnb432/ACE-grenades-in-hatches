@@ -18,7 +18,7 @@
 
 // Create blast effect
 private _source1 = "#particlesource" createVehicleLocal _this;
-_source1 setParticleClass "GrenadeExp";
+_source1 setParticleClass "AmmoExpSparks";
 _source1 setParticleParams [
     ["\A3\data_f\ParticleEffects\Universal\Universal", 16, 0, 32, 0],
     "",
@@ -60,7 +60,7 @@ _source1 setParticleCircle [0, [0, 0, 0]];
 
 // Create smoke effect
 private _source2 = "#particlesource" createVehicleLocal _this;
-_source2 setParticleClass "GrenadeSmoke1";
+_source2 setParticleClass "AmmoLightSmokeParticles";
 _source2 setParticleParams [
     ["\A3\data_f\ParticleEffects\Universal\Universal", 16, 9, 1, 0],
     "",
