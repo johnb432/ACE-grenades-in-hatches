@@ -1,3 +1,8 @@
+# Changelog for ACE Grenades in hatches 9.2.2025
+
+1.2.7.0
+- Remove RPT spam when using grenade particles.
+
 # Changelog for ACE Grenades in hatches 18.1.2025
 
 1.2.6.0
